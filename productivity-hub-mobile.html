@@ -608,6 +608,23 @@
         body.dark-mode .quick-action .label {
             color: #e2e8f0;
         }
+        
+        /* Settings */
+        .settings-card {
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        body.dark-mode .settings-card {
+            background: rgba(30, 41, 59, 0.95) !important;
+        }
+        
+        body.dark-mode .settings-title {
+            color: white !important;
+        }
+        
+        body.dark-mode #data-stats {
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -711,16 +728,23 @@
                 <h2 class="section-title">Settings</h2>
             </div>
             
-            <div style="background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 20px; margin-bottom: 15px;">
-                <h3 style="margin-bottom: 15px; color: #2d3748;">Microsoft To Do</h3>
+            <div style="background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 20px; margin-bottom: 15px;" class="settings-card">
+                <h3 style="margin-bottom: 15px; color: #2d3748;" class="settings-title">Microsoft To Do</h3>
                 <button class="btn btn-primary" onclick="connectMSToDo()" id="ms-connect-btn" style="width: 100%; margin-bottom: 10px;">
                     📋 Connect Microsoft To Do
                 </button>
                 <p style="font-size: 0.85em; color: #718096;">Sync your tasks with Microsoft To Do</p>
             </div>
             
-            <div style="background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 20px; margin-bottom: 15px;">
-                <h3 style="margin-bottom: 15px; color: #2d3748;">Data</h3>
+            <div style="background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 20px; margin-bottom: 15px;" class="settings-card">
+                <h3 style="margin-bottom: 15px; color: #2d3748;" class="settings-title">Data</h3>
+                <div style="background: #f7fafc; padding: 12px; border-radius: 8px; margin-bottom: 12px; font-size: 0.9em;">
+                    <div style="margin-bottom: 5px;">📊 <strong id="data-stats">Loading...</strong></div>
+                    <div style="color: #718096; font-size: 0.85em;">Data is shared with desktop version</div>
+                </div>
+                <button class="btn btn-secondary" onclick="addSampleData()" style="width: 100%; margin-bottom: 10px;">
+                    ✨ Add Sample Data
+                </button>
                 <button class="btn btn-secondary" onclick="exportData()" style="width: 100%; margin-bottom: 10px;">
                     📤 Export All Data
                 </button>
@@ -875,6 +899,12 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             checkMSAuth();
+            
+            // Debug: Log storage info
+            console.log('Tasks in storage:', tasks.length);
+            console.log('Jobs in storage:', jobs.length);
+            console.log('All localStorage keys:', Object.keys(localStorage));
+            
             renderDashboard();
             renderTasks();
             renderJobs();
@@ -883,7 +913,70 @@
             if (localStorage.getItem('darkMode') === 'true') {
                 document.body.classList.add('dark-mode');
             }
+            
+            // Show welcome message if no data
+            if (tasks.length === 0 && jobs.length === 0) {
+                setTimeout(() => {
+                    if (confirm('No data found. Would you like to add some sample tasks to get started?')) {
+                        addSampleData();
+                    }
+                }, 500);
+            }
         });
+        
+        // Add sample data for testing
+        function addSampleData() {
+            tasks = [
+                {
+                    id: Date.now() + '1',
+                    title: 'Schedule doctor appointment for Sanjida',
+                    description: 'Call and book appointment',
+                    priority: 'high',
+                    status: 'todo',
+                    dueDate: '',
+                    createdAt: new Date().toISOString()
+                },
+                {
+                    id: Date.now() + '2',
+                    title: 'Renew Aditto\'s passport',
+                    description: 'Urgent - check requirements',
+                    priority: 'high',
+                    status: 'todo',
+                    dueDate: '',
+                    createdAt: new Date().toISOString()
+                },
+                {
+                    id: Date.now() + '3',
+                    title: 'Register m2labs as LLC',
+                    description: 'Washington State registration',
+                    priority: 'medium',
+                    status: 'in-progress',
+                    dueDate: '',
+                    createdAt: new Date().toISOString()
+                }
+            ];
+            
+            jobs = [
+                {
+                    id: Date.now() + '1',
+                    company: 'Example Tech Corp',
+                    title: 'Senior TPM',
+                    status: 'applied',
+                    date: new Date().toISOString().split('T')[0],
+                    notes: 'Applied through LinkedIn',
+                    createdAt: new Date().toISOString()
+                }
+            ];
+            
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            localStorage.setItem('jobs', JSON.stringify(jobs));
+            
+            renderDashboard();
+            renderTasks();
+            renderJobs();
+            
+            alert('✅ Sample data added! You can edit or delete these and add your own.');
+        }
         
         // Tab Switching
         function switchTab(tab) {
@@ -892,6 +985,19 @@
             
             document.getElementById(`${tab}-tab`).classList.add('active');
             event.target.closest('.nav-btn').classList.add('active');
+            
+            // Update data stats when switching to settings
+            if (tab === 'settings') {
+                updateDataStats();
+            }
+        }
+        
+        // Update data statistics
+        function updateDataStats() {
+            const statsEl = document.getElementById('data-stats');
+            if (statsEl) {
+                statsEl.textContent = `${tasks.length} tasks, ${jobs.length} jobs`;
+            }
         }
         
         // Dark Mode
