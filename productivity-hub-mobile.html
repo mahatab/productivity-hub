@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>🚀 Productivity Hub Mobile</title>
+    <script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+            min-height: 100vh;
+            padding-bottom: 80px;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+        
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .header {
+            background: rgba(30, 41, 59, 0.95);
+            color: white;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 1.3em;
+            color: #2d3748;
+        }
+        
+        body.dark-mode .header h1 {
+            color: white;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .icon-btn {
+            padding: 10px;
+            border: none;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .icon-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 8px 20px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        body.dark-mode .bottom-nav {
+            background: rgba(30, 41, 59, 0.95);
+        }
+        
+        .nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 16px;
+            border: none;
+            background: none;
+            color: #718096;
+            font-size: 0.75em;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s;
+            min-width: 70px;
+        }
+        
+        .nav-btn .icon {
+            font-size: 1.8em;
+        }
+        
+        .nav-btn.active {
+            color: #6366f1;
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        body.dark-mode .nav-btn.active {
+            color: #a78bfa;
+            background: rgba(167, 139, 250, 0.2);
+        }
+        
+        /* Content */
+        .content {
+            padding: 15px;
+            padding-bottom: 20px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        body.dark-mode .stat-card {
+            background: rgba(30, 41, 59, 0.95);
+            color: white;
+        }
+        
+        .stat-card h3 {
+            font-size: 2em;
+            color: #6366f1;
+            margin-bottom: 5px;
+        }
+        
+        body.dark-mode .stat-card h3 {
+            color: #a78bfa;
+        }
+        
+        .stat-card p {
+            color: #718096;
+            font-size: 0.85em;
+        }
+        
+        /* Task Cards */
+        .task-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 4px solid #6366f1;
+        }
+        
+        body.dark-mode .task-card {
+            background: rgba(30, 41, 59, 0.95);
+            color: white;
+            border-left-color: #8b5cf6;
+        }
+        
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 10px;
+        }
+        
+        .task-title {
+            font-weight: 600;
+            font-size: 1.05em;
+            flex: 1;
+            color: #2d3748;
+        }
+        
+        body.dark-mode .task-title {
+            color: white;
+        }
+        
+        .task-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .task-btn {
+            background: none;
+            border: none;
+            font-size: 1.3em;
+            cursor: pointer;
+            padding: 4px;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .task-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .task-badge {
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+        
+        .priority-high { background: #fed7d7; color: #9b2c2c; }
+        .priority-medium { background: #feebc8; color: #9c4221; }
+        .priority-low { background: #c6f6d5; color: #22543d; }
+        
+        /* Job Cards */
+        .job-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 18px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 4px solid #6366f1;
+        }
+        
+        body.dark-mode .job-card {
+            background: rgba(30, 41, 59, 0.95);
+            color: white;
+            border-left-color: #8b5cf6;
+        }
+        
+        .job-company {
+            color: #6366f1;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        body.dark-mode .job-company {
+            color: #a78bfa;
+        }
+        
+        .job-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        body.dark-mode .job-title {
+            color: white;
+        }
+        
+        .job-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        
+        .status-applied { background: #bee3f8; color: #2c5282; }
+        .status-rejected { background: #fed7d7; color: #9b2c2c; }
+        
+        /* Section Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .add-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+            cursor: pointer;
+        }
+        
+        .add-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: flex-start;
+            padding-top: 20px;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            width: 100%;
+            max-width: 100%;
+            margin: auto auto 0;
+            padding: 25px 20px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+        }
+        
+        body.dark-mode .modal-content {
+            background: #1e293b;
+            color: white;
+        }
+        
+        .modal-header {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+        
+        body.dark-mode .modal-header {
+            color: white;
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #4a5568;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        
+        body.dark-mode .form-group label {
+            color: #e2e8f0;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: inherit;
+        }
+        
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea,
+        body.dark-mode .form-group select {
+            background: #334155;
+            border-color: #475569;
+            color: white;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            min-height: 50px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+        
+        body.dark-mode .btn-secondary {
+            background: #475569;
+            color: white;
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* Filter Pills */
+        .filter-group {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 10px 0;
+            margin-bottom: 15px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .filter-group::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .filter-btn {
+            padding: 10px 16px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            white-space: nowrap;
+            min-height: 44px;
+        }
+        
+        body.dark-mode .filter-btn {
+            background: #334155;
+            border-color: #475569;
+            color: white;
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            border-color: #6366f1;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 60px 20px;
+            font-size: 1.1em;
+        }
+        
+        /* Loading */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        /* MS To Do Status */
+        .ms-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-bottom: 15px;
+        }
+        
+        .sync-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #fc8181;
+        }
+        
+        .sync-indicator.active {
+            background: #48bb78;
+        }
+        
+        /* Search */
+        .search-box {
+            margin-bottom: 15px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            font-size: 1em;
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        body.dark-mode .search-box input {
+            background: rgba(30, 41, 59, 0.95);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .quick-action {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        body.dark-mode .quick-action {
+            background: rgba(30, 41, 59, 0.95);
+        }
+        
+        .quick-action:active {
+            transform: scale(0.95);
+        }
+        
+        .quick-action .icon {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        
+        .quick-action .label {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #4a5568;
+        }
+        
+        body.dark-mode .quick-action .label {
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <h1>🚀 Productivity Hub</h1>
+            <div class="header-actions">
+                <button class="icon-btn" onclick="toggleDarkMode()">🌙</button>
+                <button class="icon-btn" onclick="syncMSToDo()" id="sync-btn" style="display: none;">🔄</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Content -->
+    <div class="content">
+        <!-- Dashboard Tab -->
+        <div id="dashboard-tab" class="tab-content active">
+            <div class="ms-status-badge" id="ms-status">
+                <span class="sync-indicator"></span>
+                <span id="ms-status-text">Not Connected</span>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 id="dash-total-tasks">0</h3>
+                    <p>Total Tasks</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="dash-high-priority">0</h3>
+                    <p>High Priority</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="dash-total-jobs">0</h3>
+                    <p>Job Apps</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="dash-active-jobs">0</h3>
+                    <p>Active</p>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: white; margin-bottom: 10px; font-size: 1.1em;">🔥 Urgent Tasks</h3>
+                <div id="dash-urgent-tasks"></div>
+            </div>
+            
+            <div>
+                <h3 style="color: white; margin-bottom: 10px; font-size: 1.1em;">💼 Recent Jobs</h3>
+                <div id="dash-recent-jobs"></div>
+            </div>
+        </div>
+        
+        <!-- Tasks Tab -->
+        <div id="tasks-tab" class="tab-content">
+            <div class="section-header">
+                <h2 class="section-title">Tasks</h2>
+                <button class="add-btn" onclick="openTaskModal()">+</button>
+            </div>
+            
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Search tasks..." oninput="filterTasks()">
+            </div>
+            
+            <div class="filter-group">
+                <button class="filter-btn active" data-filter="all" onclick="setFilter(this, 'all')">All</button>
+                <button class="filter-btn" data-filter="high" onclick="setFilter(this, 'high')">🔴 High</button>
+                <button class="filter-btn" data-filter="medium" onclick="setFilter(this, 'medium')">🟡 Medium</button>
+                <button class="filter-btn" data-filter="low" onclick="setFilter(this, 'low')">🟢 Low</button>
+                <button class="filter-btn" data-filter="todo" onclick="setFilter(this, 'todo')">📝 To Do</button>
+                <button class="filter-btn" data-filter="in-progress" onclick="setFilter(this, 'in-progress')">🚀 In Progress</button>
+            </div>
+            
+            <div id="tasks-list"></div>
+        </div>
+        
+        <!-- Jobs Tab -->
+        <div id="jobs-tab" class="tab-content">
+            <div class="section-header">
+                <h2 class="section-title">Jobs</h2>
+                <button class="add-btn" onclick="openJobModal()">+</button>
+            </div>
+            
+            <div class="quick-actions">
+                <div class="quick-action" onclick="filterJobs('all')">
+                    <div class="icon">📊</div>
+                    <div class="label">All (<span id="job-total">0</span>)</div>
+                </div>
+                <div class="quick-action" onclick="filterJobs('applied')">
+                    <div class="icon">✅</div>
+                    <div class="label">Applied (<span id="job-active">0</span>)</div>
+                </div>
+            </div>
+            
+            <div id="jobs-list"></div>
+        </div>
+        
+        <!-- Settings Tab -->
+        <div id="settings-tab" class="tab-content">
+            <div class="section-header">
+                <h2 class="section-title">Settings</h2>
+            </div>
+            
+            <div style="background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 20px; margin-bottom: 15px;">
+                <h3 style="margin-bottom: 15px; color: #2d3748;">Microsoft To Do</h3>
+                <button class="btn btn-primary" onclick="connectMSToDo()" id="ms-connect-btn" style="width: 100%; margin-bottom: 10px;">
+                    📋 Connect Microsoft To Do
+                </button>
+                <p style="font-size: 0.85em; color: #718096;">Sync your tasks with Microsoft To Do</p>
+            </div>
+            
+            <div style="background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 20px; margin-bottom: 15px;">
+                <h3 style="margin-bottom: 15px; color: #2d3748;">Data</h3>
+                <button class="btn btn-secondary" onclick="exportData()" style="width: 100%; margin-bottom: 10px;">
+                    📤 Export All Data
+                </button>
+                <button class="btn btn-secondary" onclick="clearAllData()" style="width: 100%; background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%); color: white;">
+                    🗑️ Clear All Data
+                </button>
+            </div>
+            
+            <div style="text-align: center; color: rgba(255, 255, 255, 0.7); margin-top: 30px;">
+                <p>Productivity Hub Mobile v1.0</p>
+                <p style="font-size: 0.8em; margin-top: 5px;">Made with ❤️ by Big Giant Head & Rudro</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <button class="nav-btn active" onclick="switchTab('dashboard')">
+            <div class="icon">📈</div>
+            <div>Dashboard</div>
+        </button>
+        <button class="nav-btn" onclick="switchTab('tasks')">
+            <div class="icon">✅</div>
+            <div>Tasks</div>
+        </button>
+        <button class="nav-btn" onclick="switchTab('jobs')">
+            <div class="icon">💼</div>
+            <div>Jobs</div>
+        </button>
+        <button class="nav-btn" onclick="switchTab('settings')">
+            <div class="icon">⚙️</div>
+            <div>Settings</div>
+        </button>
+    </div>
+    
+    <!-- Task Modal -->
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <div class="modal-header">Add Task</div>
+            <form id="taskForm" onsubmit="saveTask(event)">
+                <div class="form-group">
+                    <label for="taskTitle">Title *</label>
+                    <input type="text" id="taskTitle" required placeholder="Enter task title">
+                </div>
+                <div class="form-group">
+                    <label for="taskDescription">Description</label>
+                    <textarea id="taskDescription" placeholder="Add details"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="taskPriority">Priority</label>
+                    <select id="taskPriority">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="taskStatus">Status</label>
+                    <select id="taskStatus">
+                        <option value="backlog">Backlog</option>
+                        <option value="todo" selected>To Do</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="done">Done</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="taskDueDate">Due Date</label>
+                    <input type="date" id="taskDueDate">
+                </div>
+                <input type="hidden" id="taskId">
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeTaskModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Job Modal -->
+    <div class="modal" id="jobModal">
+        <div class="modal-content">
+            <div class="modal-header">Add Job</div>
+            <form id="jobForm" onsubmit="saveJob(event)">
+                <div class="form-group">
+                    <label for="jobCompany">Company *</label>
+                    <input type="text" id="jobCompany" required placeholder="Company name">
+                </div>
+                <div class="form-group">
+                    <label for="jobTitle">Job Title *</label>
+                    <input type="text" id="jobTitle" required placeholder="Position title">
+                </div>
+                <div class="form-group">
+                    <label for="jobStatus">Status</label>
+                    <select id="jobStatus">
+                        <option value="applied">Applied</option>
+                        <option value="interview">Interview</option>
+                        <option value="offer">Offer</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="jobDate">Application Date</label>
+                    <input type="date" id="jobDate">
+                </div>
+                <div class="form-group">
+                    <label for="jobNotes">Notes</label>
+                    <textarea id="jobNotes" placeholder="Add notes"></textarea>
+                </div>
+                <input type="hidden" id="jobId">
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeJobModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Microsoft To Do Configuration
+        const msalConfig = {
+            auth: {
+                clientId: '32b2a30b-bc78-4fac-b9a6-9decab95ac6c',
+                authority: 'https://login.microsoftonline.com/common',
+                redirectUri: window.location.origin + window.location.pathname
+            },
+            cache: {
+                cacheLocation: 'localStorage',
+                storeAuthStateInCookie: false
+            }
+        };
+        
+        const loginRequest = {
+            scopes: ['Tasks.ReadWrite', 'User.Read']
+        };
+        
+        let msalInstance = null;
+        let msAccessToken = null;
+        let msDefaultListId = null;
+        
+        // Initialize MSAL
+        try {
+            msalInstance = new msal.PublicClientApplication(msalConfig);
+        } catch (error) {
+            console.error('MSAL initialization error:', error);
+        }
+        
+        // Data Storage
+        let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+        let jobs = JSON.parse(localStorage.getItem('jobs') || '[]');
+        let currentFilter = 'all';
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            checkMSAuth();
+            renderDashboard();
+            renderTasks();
+            renderJobs();
+            
+            // Check for dark mode preference
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+        
+        // Tab Switching
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(`${tab}-tab`).classList.add('active');
+            event.target.closest('.nav-btn').classList.add('active');
+        }
+        
+        // Dark Mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+        
+        // Dashboard
+        function renderDashboard() {
+            const totalTasks = tasks.length;
+            const highPriority = tasks.filter(t => t.priority === 'high' && t.status !== 'done').length;
+            const completedTasks = tasks.filter(t => t.status === 'done').length;
+            const totalJobs = jobs.length;
+            const activeJobs = jobs.filter(j => j.status !== 'rejected').length;
+            
+            document.getElementById('dash-total-tasks').textContent = totalTasks;
+            document.getElementById('dash-high-priority').textContent = highPriority;
+            document.getElementById('dash-total-jobs').textContent = totalJobs;
+            document.getElementById('dash-active-jobs').textContent = activeJobs;
+            
+            // Urgent tasks
+            const urgentTasks = tasks
+                .filter(t => t.priority === 'high' && t.status !== 'done')
+                .slice(0, 3);
+            
+            const urgentHTML = urgentTasks.length > 0 ? urgentTasks.map(t => `
+                <div class="task-card" style="margin-bottom: 10px;">
+                    <div style="font-weight: 600;">${t.title}</div>
+                    ${t.dueDate ? `<div style="color: #f56565; font-size: 0.85em; margin-top: 5px;">📅 ${new Date(t.dueDate).toLocaleDateString()}</div>` : ''}
+                </div>
+            `).join('') : '<div style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">No urgent tasks</div>';
+            
+            document.getElementById('dash-urgent-tasks').innerHTML = urgentHTML;
+            
+            // Recent jobs
+            const recentJobs = jobs.slice(0, 3);
+            const jobsHTML = recentJobs.length > 0 ? recentJobs.map(j => `
+                <div class="job-card" style="margin-bottom: 10px;">
+                    <div class="job-company">${j.company}</div>
+                    <div style="font-weight: 600; margin-bottom: 5px;">${j.title}</div>
+                    <span class="job-status status-${j.status}">${j.status}</span>
+                </div>
+            `).join('') : '<div style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">No job applications</div>';
+            
+            document.getElementById('dash-recent-jobs').innerHTML = jobsHTML;
+        }
+        
+        // Tasks
+        function renderTasks() {
+            const filtered = filterTasksByStatus();
+            const listEl = document.getElementById('tasks-list');
+            
+            if (filtered.length === 0) {
+                listEl.innerHTML = '<div class="empty-state">No tasks found</div>';
+                return;
+            }
+            
+            listEl.innerHTML = filtered.map(task => `
+                <div class="task-card" data-id="${task.id}">
+                    <div class="task-header">
+                        <div class="task-title">${task.title}</div>
+                        <div class="task-actions">
+                            <button class="task-btn" onclick="editTask('${task.id}')">✏️</button>
+                            <button class="task-btn" onclick="deleteTask('${task.id}')">🗑️</button>
+                        </div>
+                    </div>
+                    ${task.description ? `<div style="color: #718096; font-size: 0.9em; margin-bottom: 10px;">${task.description}</div>` : ''}
+                    ${task.dueDate ? `<div style="color: #f56565; font-size: 0.85em; margin-bottom: 10px;">📅 ${new Date(task.dueDate).toLocaleDateString()}</div>` : ''}
+                    <div class="task-meta">
+                        <span class="task-badge priority-${task.priority}">${task.priority}</span>
+                        <span class="task-badge" style="background: #e6fffa; color: #234e52;">${task.status}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function filterTasksByStatus() {
+            let filtered = tasks;
+            const search = document.getElementById('searchInput')?.value.toLowerCase() || '';
+            
+            if (currentFilter !== 'all') {
+                if (['high', 'medium', 'low'].includes(currentFilter)) {
+                    filtered = filtered.filter(t => t.priority === currentFilter);
+                } else {
+                    filtered = filtered.filter(t => t.status === currentFilter);
+                }
+            }
+            
+            if (search) {
+                filtered = filtered.filter(t => 
+                    t.title.toLowerCase().includes(search) || 
+                    t.description?.toLowerCase().includes(search)
+                );
+            }
+            
+            return filtered;
+        }
+        
+        function setFilter(btn, filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderTasks();
+        }
+        
+        function filterTasks() {
+            renderTasks();
+        }
+        
+        // Task Modal
+        function openTaskModal(status = 'todo') {
+            document.getElementById('taskForm').reset();
+            document.getElementById('taskStatus').value = status;
+            document.getElementById('taskId').value = '';
+            document.getElementById('taskModal').classList.add('active');
+        }
+        
+        function closeTaskModal() {
+            document.getElementById('taskModal').classList.remove('active');
+        }
+        
+        function editTask(id) {
+            const task = tasks.find(t => t.id === id);
+            if (!task) return;
+            
+            document.getElementById('taskTitle').value = task.title;
+            document.getElementById('taskDescription').value = task.description || '';
+            document.getElementById('taskPriority').value = task.priority;
+            document.getElementById('taskStatus').value = task.status;
+            document.getElementById('taskDueDate').value = task.dueDate || '';
+            document.getElementById('taskId').value = task.id;
+            
+            document.getElementById('taskModal').classList.add('active');
+        }
+        
+        function saveTask(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('taskId').value || Date.now().toString();
+            const task = {
+                id,
+                title: document.getElementById('taskTitle').value,
+                description: document.getElementById('taskDescription').value,
+                priority: document.getElementById('taskPriority').value,
+                status: document.getElementById('taskStatus').value,
+                dueDate: document.getElementById('taskDueDate').value,
+                createdAt: tasks.find(t => t.id === id)?.createdAt || new Date().toISOString()
+            };
+            
+            const index = tasks.findIndex(t => t.id === id);
+            if (index >= 0) {
+                tasks[index] = task;
+            } else {
+                tasks.unshift(task);
+            }
+            
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            closeTaskModal();
+            renderTasks();
+            renderDashboard();
+        }
+        
+        function deleteTask(id) {
+            if (!confirm('Delete this task?')) return;
+            tasks = tasks.filter(t => t.id !== id);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            renderTasks();
+            renderDashboard();
+        }
+        
+        // Jobs
+        function renderJobs() {
+            const listEl = document.getElementById('jobs-list');
+            
+            document.getElementById('job-total').textContent = jobs.length;
+            document.getElementById('job-active').textContent = jobs.filter(j => j.status !== 'rejected').length;
+            
+            if (jobs.length === 0) {
+                listEl.innerHTML = '<div class="empty-state">No job applications yet</div>';
+                return;
+            }
+            
+            listEl.innerHTML = jobs.map(job => `
+                <div class="job-card">
+                    <div class="job-company">${job.company}</div>
+                    <div class="job-title">${job.title}</div>
+                    <span class="job-status status-${job.status}">${job.status}</span>
+                    ${job.date ? `<div style="color: #718096; font-size: 0.85em; margin-top: 10px;">📅 Applied: ${new Date(job.date).toLocaleDateString()}</div>` : ''}
+                    ${job.notes ? `<div style="color: #718096; font-size: 0.9em; margin-top: 10px;">${job.notes}</div>` : ''}
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button class="btn btn-secondary" onclick="editJob('${job.id}')" style="flex: 1; padding: 10px; font-size: 0.9em;">✏️ Edit</button>
+                        <button class="btn btn-secondary" onclick="deleteJob('${job.id}')" style="flex: 1; padding: 10px; font-size: 0.9em; background: #fed7d7; color: #9b2c2c;">🗑️ Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function filterJobs(status) {
+            // Simple filter for mobile (could be enhanced)
+            renderJobs();
+        }
+        
+        // Job Modal
+        function openJobModal() {
+            document.getElementById('jobForm').reset();
+            document.getElementById('jobId').value = '';
+            document.getElementById('jobModal').classList.add('active');
+        }
+        
+        function closeJobModal() {
+            document.getElementById('jobModal').classList.remove('active');
+        }
+        
+        function editJob(id) {
+            const job = jobs.find(j => j.id === id);
+            if (!job) return;
+            
+            document.getElementById('jobCompany').value = job.company;
+            document.getElementById('jobTitle').value = job.title;
+            document.getElementById('jobStatus').value = job.status;
+            document.getElementById('jobDate').value = job.date || '';
+            document.getElementById('jobNotes').value = job.notes || '';
+            document.getElementById('jobId').value = job.id;
+            
+            document.getElementById('jobModal').classList.add('active');
+        }
+        
+        function saveJob(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('jobId').value || Date.now().toString();
+            const job = {
+                id,
+                company: document.getElementById('jobCompany').value,
+                title: document.getElementById('jobTitle').value,
+                status: document.getElementById('jobStatus').value,
+                date: document.getElementById('jobDate').value,
+                notes: document.getElementById('jobNotes').value,
+                createdAt: jobs.find(j => j.id === id)?.createdAt || new Date().toISOString()
+            };
+            
+            const index = jobs.findIndex(j => j.id === id);
+            if (index >= 0) {
+                jobs[index] = job;
+            } else {
+                jobs.unshift(job);
+            }
+            
+            localStorage.setItem('jobs', JSON.stringify(jobs));
+            closeJobModal();
+            renderJobs();
+            renderDashboard();
+        }
+        
+        function deleteJob(id) {
+            if (!confirm('Delete this job application?')) return;
+            jobs = jobs.filter(j => j.id !== id);
+            localStorage.setItem('jobs', JSON.stringify(jobs));
+            renderJobs();
+            renderDashboard();
+        }
+        
+        // Microsoft To Do
+        async function checkMSAuth() {
+            if (!msalInstance) return;
+            
+            const accounts = msalInstance.getAllAccounts();
+            if (accounts.length > 0) {
+                try {
+                    const response = await msalInstance.acquireTokenSilent({
+                        ...loginRequest,
+                        account: accounts[0]
+                    });
+                    msAccessToken = response.accessToken;
+                    updateMSStatus(true);
+                    return true;
+                } catch (error) {
+                    console.log('Silent auth failed:', error);
+                }
+            }
+            return false;
+        }
+        
+        async function connectMSToDo() {
+            if (!msalInstance) {
+                alert('Microsoft authentication not available');
+                return;
+            }
+            
+            try {
+                await msalInstance.loginRedirect(loginRequest);
+            } catch (error) {
+                console.error('MS To Do connection error:', error);
+                alert('Failed to connect: ' + error.message);
+            }
+        }
+        
+        async function syncMSToDo() {
+            if (!msAccessToken) {
+                alert('Please connect to Microsoft To Do first');
+                return;
+            }
+            
+            alert('Syncing with Microsoft To Do...');
+            // Sync logic here
+        }
+        
+        function updateMSStatus(connected) {
+            const indicator = document.querySelector('.sync-indicator');
+            const text = document.getElementById('ms-status-text');
+            const syncBtn = document.getElementById('sync-btn');
+            
+            if (connected) {
+                indicator.classList.add('active');
+                text.textContent = 'Connected';
+                syncBtn.style.display = 'flex';
+            } else {
+                indicator.classList.remove('active');
+                text.textContent = 'Not Connected';
+                syncBtn.style.display = 'none';
+            }
+        }
+        
+        // Export Data
+        function exportData() {
+            const data = {
+                tasks,
+                jobs,
+                exportDate: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `productivity-hub-export-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function clearAllData() {
+            if (!confirm('Are you sure? This will delete all tasks and jobs!')) return;
+            
+            localStorage.clear();
+            tasks = [];
+            jobs = [];
+            renderDashboard();
+            renderTasks();
+            renderJobs();
+            alert('All data cleared!');
+        }
+        
+        // Handle redirect response
+        async function handleRedirectResponse() {
+            if (!msalInstance) return;
+            
+            try {
+                const response = await msalInstance.handleRedirectPromise();
+                if (response) {
+                    msAccessToken = response.accessToken;
+                    updateMSStatus(true);
+                    alert('✅ Connected to Microsoft To Do!');
+                }
+            } catch (error) {
+                console.error('Redirect handling error:', error);
+            }
+        }
+        
+        handleRedirectResponse();
+    </script>
+</body>
+</html>
