@@ -1,0 +1,14 @@
+# Sensitive & Personal Data
+USER.md
+memory/
+*.png
+*.jpg
+*.jpeg
+
+# Build artifacts
+node_modules/
+.DS_Store
+
+# Temporary files
+*.tmp
+*.log

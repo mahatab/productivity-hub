@@ -1,0 +1,7 @@
+From: rudro.ai.agent@gmail.com
+To: mahatab@msn.com
+Subject: WhatsApp QR Code
+
+Here's the WhatsApp QR code for linking. Scan this in WhatsApp → Linked Devices to connect Clawdbot.
+
+<#part type="image/png" filename="whatsapp-qr.png">/Users/mahatabrashid/clawd/whatsapp-qr.png<#/part>
