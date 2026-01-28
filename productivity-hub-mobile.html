@@ -891,9 +891,9 @@
             console.error('MSAL initialization error:', error);
         }
         
-        // Data Storage
-        let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-        let jobs = JSON.parse(localStorage.getItem('jobs') || '[]');
+        // Data Storage (using same keys as desktop version)
+        let tasks = JSON.parse(localStorage.getItem('hubTasks') || '[]');
+        let jobs = JSON.parse(localStorage.getItem('hubJobs') || '[]');
         let currentFilter = 'all';
         
         // Initialize
@@ -968,8 +968,8 @@
                 }
             ];
             
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-            localStorage.setItem('jobs', JSON.stringify(jobs));
+            localStorage.setItem('hubTasks', JSON.stringify(tasks));
+            localStorage.setItem('hubJobs', JSON.stringify(jobs));
             
             renderDashboard();
             renderTasks();
@@ -1155,7 +1155,7 @@
                 tasks.unshift(task);
             }
             
-            localStorage.setItem('tasks', JSON.stringify(tasks));
+            localStorage.setItem('hubTasks', JSON.stringify(tasks));
             closeTaskModal();
             renderTasks();
             renderDashboard();
@@ -1164,7 +1164,7 @@
         function deleteTask(id) {
             if (!confirm('Delete this task?')) return;
             tasks = tasks.filter(t => t.id !== id);
-            localStorage.setItem('tasks', JSON.stringify(tasks));
+            localStorage.setItem('hubTasks', JSON.stringify(tasks));
             renderTasks();
             renderDashboard();
         }
@@ -1247,7 +1247,7 @@
                 jobs.unshift(job);
             }
             
-            localStorage.setItem('jobs', JSON.stringify(jobs));
+            localStorage.setItem('hubJobs', JSON.stringify(jobs));
             closeJobModal();
             renderJobs();
             renderDashboard();
@@ -1256,7 +1256,7 @@
         function deleteJob(id) {
             if (!confirm('Delete this job application?')) return;
             jobs = jobs.filter(j => j.id !== id);
-            localStorage.setItem('jobs', JSON.stringify(jobs));
+            localStorage.setItem('hubJobs', JSON.stringify(jobs));
             renderJobs();
             renderDashboard();
         }
