@@ -41,6 +41,21 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - When you make a mistake → document it so future-you doesn't repeat it
 - **Text > Brain** 📝
 
+## 🚀 Auto-Deploy to Firebase
+- **ALWAYS deploy after task/job updates** so Big Giant Head sees changes on all devices
+- When to deploy:
+  * Task added/updated (via `task:` message or file changes)
+  * Job added/updated (email scanner, manual, status change)
+  * Dashboard files modified (productivity-hub.html, etc.)
+  * HEARTBEAT.md updated with tasks
+- How to deploy:
+  ```bash
+  cd ~/clawd && ./scripts/deploy-to-firebase.sh "Description of change"
+  ```
+- Confirm deployment: "✅ Deployed to Firebase! Changes live in ~30 seconds"
+- Firebase URL: https://productivity-hub-mahatab.web.app
+- Skip only for: memory files, temp experiments, or when user says not to
+
 ## Safety
 
 - Don't exfiltrate private data. Ever.

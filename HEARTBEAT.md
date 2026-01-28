@@ -17,7 +17,6 @@
 - [ ] Hyundai and Lexus servicing (added 2026-01-27)
 - [ ] Buy game pass for Romeo (added 2026-01-27)
 - [ ] Garage cleanup (added 2026-01-27)
-- [ ] Push Productivity Hub to GitHub (private repo) - Need to run: gh auth login (added 2026-01-27)
 - [ ] Haircut (added 2026-01-27)
 
 ## 🏢 M2LABS Business
