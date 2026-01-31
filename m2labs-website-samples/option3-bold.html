@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>m2labs — Building the Antidote to Chaos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #fff;
+            color: #000;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+        
+        header {
+            padding: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            color: #000;
+        }
+        
+        nav a {
+            margin-left: 40px;
+            text-decoration: none;
+            color: #000;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #FF6B35;
+        }
+        
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            padding: 60px 0;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(48px, 7vw, 96px);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 40px;
+            color: #000;
+        }
+        
+        .hero .highlight {
+            color: #FF6B35;
+        }
+        
+        .hero p {
+            font-size: clamp(20px, 2.5vw, 28px);
+            color: #555;
+            margin-bottom: 50px;
+            line-height: 1.5;
+        }
+        
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .cta-primary {
+            display: inline-block;
+            padding: 20px 45px;
+            background: #FF6B35;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-primary:hover {
+            background: #E55A2A;
+            transform: translateY(-2px);
+        }
+        
+        .cta-secondary {
+            display: inline-block;
+            padding: 20px 45px;
+            background: transparent;
+            color: #000;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            border: 2px solid #000;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-secondary:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        .section {
+            padding: 140px 0;
+        }
+        
+        .section-label {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #FF6B35;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 900;
+            margin-bottom: 40px;
+            line-height: 1.1;
+        }
+        
+        .section-text {
+            font-size: clamp(18px, 2vw, 24px);
+            color: #555;
+            max-width: 850px;
+            line-height: 1.7;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-top: 80px;
+        }
+        
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+        
+        .principle {
+            padding: 60px;
+            background: #f8f8f8;
+            border-radius: 12px;
+        }
+        
+        .principle-number {
+            font-size: 48px;
+            font-weight: 900;
+            color: #FF6B35;
+            margin-bottom: 20px;
+        }
+        
+        .principle h3 {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        
+        .principle p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        .project-highlight {
+            background: #000;
+            color: #fff;
+            padding: 100px 60px;
+            border-radius: 16px;
+            margin: 100px 0;
+            text-align: center;
+        }
+        
+        .project-highlight h2 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 900;
+            margin-bottom: 30px;
+        }
+        
+        .project-highlight p {
+            font-size: clamp(18px, 2vw, 24px);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+        
+        .project-tag {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #FF6B35;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        footer {
+            padding: 100px 0;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        
+        footer h3 {
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        
+        footer p {
+            font-size: 20px;
+            color: #666;
+        }
+        
+        footer a {
+            color: #FF6B35;
+            text-decoration: none;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">m2labs</div>
+            <nav>
+                <a href="#principles">Principles</a>
+                <a href="#project">Project</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Building the <span class="highlight">Antidote</span> to Feature Bloat</h1>
+                <p>Modern apps are overwhelming. We create focused tools that do one thing perfectly. No bloat. No noise. Just clarity.</p>
+                <div class="cta-group">
+                    <a href="#project" class="cta-primary">See Our Work</a>
+                    <a href="#principles" class="cta-secondary">Our Philosophy</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="principles">
+        <div class="container">
+            <div class="section-label">Our Principles</div>
+            <h2 class="section-title">How We Build Software</h2>
+            
+            <div class="two-column">
+                <div class="principle">
+                    <div class="principle-number">01</div>
+                    <h3>Single Purpose</h3>
+                    <p>Each app solves exactly one problem. We say no to feature creep. We say yes to mastery.</p>
+                </div>
+                
+                <div class="principle">
+                    <div class="principle-number">02</div>
+                    <h3>Zero Clutter</h3>
+                    <p>Every element serves a purpose. Clean interfaces that respect your attention.</p>
+                </div>
+                
+                <div class="principle">
+                    <div class="principle-number">03</div>
+                    <h3>Speed Matters</h3>
+                    <p>No loading spinners. No lag. Instant response. Your time is valuable.</p>
+                </div>
+                
+                <div class="principle">
+                    <div class="principle-number">04</div>
+                    <h3>Human First</h3>
+                    <p>Built for people, not metrics. No dark patterns. No manipulation. Just honest tools.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="project">
+        <div class="container">
+            <div class="project-highlight">
+                <div class="project-tag">Coming Soon</div>
+                <h2>Audio Storytelling Platform</h2>
+                <p>Curated Bengali audio stories. Crystal-clear playback. Smart collections. Zero distractions. The way audio content should be experienced.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer id="contact">
+        <div class="container">
+            <h3>Let's Build Something Focused</h3>
+            <p>Get in touch: <a href="mailto:hello@m2labs.com">hello@m2labs.com</a></p>
+        </div>
+    </footer>
+</body>
+</html>

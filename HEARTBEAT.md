@@ -7,6 +7,11 @@
 - Auto-process and add to JOBS-DASHBOARD.md
 - Notify Big Giant Head of any new job responses
 
+## 📋 Microsoft To Do Sync
+- Run daily sync: `node ~/clawd/scripts/microsoft-todo/sync-tasks.js`
+- Updates this file with tasks from Microsoft To Do
+- Syncs at least once per day (preferably during morning routine)
+
 ## 🚨 URGENT TASKS
 - [ ] Schedule doctor appointment for Sanjida (added 2026-01-27)
 - [ ] Renew Aditto's passport - ASAP (added 2026-01-27)
@@ -22,18 +27,30 @@
 ## 🏢 M2LABS Business
 - [ ] Register m2labs as LLC in Washington State (added 2026-01-27)
 - [ ] Make a list of paid AI services for m2labs (added 2026-01-27)
-- [ ] Discuss Tinu about M2labs audio venture (added 2026-01-27)
+- [x] Discuss Tinu about M2labs audio venture (completed 2026-01-30)
 - [ ] m2labs website building (added 2026-01-27)
 - [ ] Need to move MitysCreativeStudio site (added 2026-01-27)
 
 ## 💼 Professional Follow-ups
-- [ ] Check with Sunil about Databricks update (added 2026-01-27)
+- [x] Check with Sunil about Databricks update (completed 2026-01-30)
 
 ## Instructions
 Check this list during heartbeat. If any tasks remain uncompleted, send a reminder via Telegram with intelligent grouping.
 
 ## Daily Email Format (8 AM PST)
 Send to: mahatab@msn.com
+
+**Email Style:**
+- ✨ **Beautiful formatting** - HTML with colors, proper spacing, visual hierarchy
+- 😊 **Emojis encouraged** - Use liberally for visual appeal
+- 🎨 **Professional but fun** - Clean design, not boring
+- 🌙 **Dark mode theme** - Dark background, light text, easy on eyes
+
+**News Gathering Method:**
+- **Primary:** Use browser tool to visit Google News, BBC, Reuters
+- **Fallback:** Use web_search if browser fails
+- **Extract text only** - no screenshots in email
+
 Include:
 1. ⚡ BREAKING NEWS (if any major breaking stories)
 2. 📰 TOP NEWS (Bangladesh, USA - Washington/Arizona/Missouri, International)
@@ -44,5 +61,9 @@ Include:
    - Include: Game matchup, time (PST), channel
    - Check for: Premier League, Champions League, Cricket internationals, NFL, NBA
 4. 💡 NEW IDEAS (related to m2labs, tech, interests)
+   - **Actionable:** Each idea must be translatable into a site or app
+   - **Build it:** Create a simple prototype/demo of the idea
+   - **Visual proof:** Include screenshot of the built app in email
+   - Save apps in: `~/clawd/daily-ideas/YYYY-MM-DD-idea-name/`
 5. ✨ INSPIRATIONAL QUOTE
 6. Task reminders (grouped by priority)

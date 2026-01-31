@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>m2labs — Focused Apps for a Distracted World</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        header {
+            padding: 30px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0A1828;
+        }
+        
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+        }
+        
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+        
+        .hero p {
+            font-size: clamp(18px, 2.5vw, 24px);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            opacity: 0.95;
+        }
+        
+        .cta {
+            display: inline-block;
+            padding: 18px 40px;
+            background: #fff;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section {
+            padding: 120px 0;
+        }
+        
+        .section-title {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #0A1828;
+        }
+        
+        .section-text {
+            font-size: clamp(18px, 2vw, 22px);
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            text-align: center;
+            line-height: 1.8;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+        
+        .feature {
+            background: #fff;
+            padding: 50px 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: #0A1828;
+        }
+        
+        .feature p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .project-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border-radius: 30px;
+            padding: 80px 60px;
+            text-align: center;
+            margin: 80px 0;
+        }
+        
+        .project-section h2 {
+            font-size: clamp(32px, 4vw, 48px);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .project-section p {
+            font-size: clamp(18px, 2vw, 22px);
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+        
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            background: #fff;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        footer p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        footer strong {
+            color: #667eea;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">m2labs</div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Focused Apps for a Distracted World</h1>
+            <p>We build apps that do one thing exceptionally well. No feature bloat. No complexity. Just clarity.</p>
+            <a href="#contact" class="cta">Learn More</a>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Why m2labs Exists</h2>
+            <p class="section-text">Modern software is overwhelming. Too many features. Too many notifications. Too much noise. We believe apps should simplify your life, not complicate it. That's why we build focused tools that respect your time and attention.</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Single Purpose</h3>
+                    <p>Each app solves exactly one problem. We resist the temptation to add "just one more feature."</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✨</div>
+                    <h3>Beautiful Simplicity</h3>
+                    <p>Clean interfaces that get out of your way. Every pixel has a purpose.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Optimized for speed. No bloat means instant responsiveness.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <div class="project-section">
+                <h2>Our First Project</h2>
+                <p>An audio storytelling platform for Bengali content. Crystal-clear playback. Curated collections. Zero distractions. Coming soon.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer id="contact">
+        <div class="container">
+            <p>Interested in working together?</p>
+            <strong>hello@m2labs.com</strong>
+        </div>
+    </footer>
+</body>
+</html>

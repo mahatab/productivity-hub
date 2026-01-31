@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>m2labs — Less Noise. More Clarity.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        header {
+            padding: 40px 0;
+            border-bottom: 2px solid #fff;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+        
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 120px);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 40px;
+            letter-spacing: -3px;
+        }
+        
+        .hero p {
+            font-size: clamp(20px, 3vw, 32px);
+            max-width: 800px;
+            margin: 0 auto 60px;
+            color: #aaa;
+        }
+        
+        .cta {
+            display: inline-block;
+            padding: 20px 50px;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            border: 2px solid #fff;
+            transition: all 0.3s ease;
+        }
+        
+        .cta:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        .section {
+            padding: 120px 0;
+            border-top: 2px solid #333;
+        }
+        
+        .section-title {
+            font-size: clamp(36px, 5vw, 72px);
+            font-weight: 900;
+            margin-bottom: 40px;
+            letter-spacing: -2px;
+        }
+        
+        .section-text {
+            font-size: clamp(18px, 2.5vw, 28px);
+            color: #aaa;
+            max-width: 900px;
+            line-height: 1.5;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+        
+        .card {
+            border: 2px solid #fff;
+            padding: 60px 40px;
+            background: #000;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            background: #fff;
+            color: #000;
+        }
+        
+        .card h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+        
+        .card p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        
+        footer {
+            padding: 60px 0;
+            border-top: 2px solid #fff;
+            text-align: center;
+            margin-top: 120px;
+        }
+        
+        footer p {
+            font-size: 18px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">m2labs</div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>LESS NOISE.<br>MORE CLARITY.</h1>
+            <p>We build focused apps that do one thing exceptionally well. No bloat. No clutter. Just pure functionality.</p>
+            <a href="#contact" class="cta">GET IN TOUCH</a>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">THE PROBLEM</h2>
+            <p class="section-text">Modern apps are bloated. Features you'll never use. Notifications you don't want. Complexity that wastes your time. We're building the antidote.</p>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">OUR APPROACH</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>ONE THING</h3>
+                    <p>Each app solves exactly one problem. Perfectly.</p>
+                </div>
+                <div class="card">
+                    <h3>ZERO CLUTTER</h3>
+                    <p>Every pixel serves a purpose. No decoration for decoration's sake.</p>
+                </div>
+                <div class="card">
+                    <h3>RESPECT TIME</h3>
+                    <p>Fast, intuitive, and effortless. Your time matters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">CURRENT PROJECT</h2>
+            <p class="section-text">Audio storytelling platform. Curated Bengali stories. Crystal-clear playback. Zero distractions. Launching soon.</p>
+        </div>
+    </section>
+    
+    <footer id="contact">
+        <div class="container">
+            <p>Ready to simplify?<br><strong>hello@m2labs.com</strong></p>
+        </div>
+    </footer>
+</body>
+</html>

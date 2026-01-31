@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #0a0a0a;
+        }
+        
+        .container {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+            border: 1px solid #2a2a2a;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin: 0 0 10px 0;
+            color: #ffffff;
+        }
+        
+        .date {
+            color: #9e9e9e;
+            font-size: 16px;
+        }
+        
+        .section {
+            margin: 30px 0;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-subtitle {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 20px 0 10px 0;
+            color: #b0b0b0;
+        }
+        
+        .news-item {
+            margin: 12px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #d0d0d0;
+        }
+        
+        .news-item:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #7c8aff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .news-source {
+            color: #777;
+            font-size: 14px;
+            font-style: italic;
+        }
+        
+        .breaking {
+            background: linear-gradient(135deg, #e91e63 0%, #f44336 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid rgba(233, 30, 99, 0.3);
+        }
+        
+        .breaking .section-title {
+            color: white;
+        }
+        
+        .game-item {
+            background: #252525;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #7c8aff;
+        }
+        
+        .game-match {
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+        
+        .game-details {
+            font-size: 14px;
+            color: #999;
+        }
+        
+        .idea-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        .idea-box h3 {
+            margin: 0 0 15px 0;
+            font-size: 22px;
+        }
+        
+        .idea-box p {
+            margin: 10px 0;
+            line-height: 1.7;
+        }
+        
+        .prototype-info {
+            background: rgba(255,255,255,0.15);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .quote-box {
+            background: #2a2a00;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-style: italic;
+            font-size: 18px;
+            color: #f0f0f0;
+        }
+        
+        .task-section {
+            background: #2a2600;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .task-group {
+            margin: 15px 0;
+        }
+        
+        .task-group-title {
+            font-weight: 700;
+            color: #ff5252;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .task-item {
+            margin: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #e0e0e0;
+        }
+        
+        .task-item:before {
+            content: "☑️";
+            position: absolute;
+            left: 0;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #333;
+            color: #888;
+            font-size: 14px;
+        }
+        
+        a {
+            color: #7c8aff;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .section-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌅 Good Morning, Big Giant Head!</h1>
+            <div class="date">{{DATE}}</div>
+        </div>
+        
+        {{BREAKING_NEWS}}
+        
+        <div class="section">
+            <div class="section-title">📰 Top News</div>
+            
+            <div class="section-subtitle">🇧🇩 Bangladesh</div>
+            {{BANGLADESH_NEWS}}
+            
+            <div class="section-subtitle">🇺🇸 USA</div>
+            {{USA_NEWS}}
+            
+            <div class="section-subtitle">🌍 International</div>
+            {{INTERNATIONAL_NEWS}}
+        </div>
+        
+        <div class="section">
+            <div class="section-title">🏅 Games on TV Today</div>
+            {{SPORTS}}
+        </div>
+        
+        <div class="section">
+            <div class="section-title">💡 New Idea (m2labs)</div>
+            {{IDEA}}
+        </div>
+        
+        <div class="quote-box">
+            <div style="margin-bottom: 10px;">✨ <strong>Today's Inspiration</strong></div>
+            {{QUOTE}}
+        </div>
+        
+        {{TASKS}}
+        
+        <div class="footer">
+            Have a productive day! 🚀<br>
+            — Rudro 🦸🏻‍♂️
+        </div>
+    </div>
+</body>
+</html>
