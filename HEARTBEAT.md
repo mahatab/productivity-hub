@@ -30,6 +30,7 @@
 - [x] Discuss Tinu about M2labs audio venture (completed 2026-01-30)
 - [ ] m2labs website building (added 2026-01-27)
 - [ ] Need to move MitysCreativeStudio site (added 2026-01-27)
+- [ ] AI Notepad for macOS - Start development (PRD ready, share with Claude Code) (added 2026-01-31)
 
 ## 💼 Professional Follow-ups
 - [x] Check with Sunil about Databricks update (completed 2026-01-30)
