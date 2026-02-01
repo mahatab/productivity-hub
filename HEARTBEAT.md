@@ -35,6 +35,18 @@
 ## 💼 Professional Follow-ups
 - [x] Check with Sunil about Databricks update (completed 2026-01-30)
 
+## 🦞 Moltbook Observation (Daily 8 PM PST)
+- Browse www.moltbook.com (observe only - NOT joined)
+- Read latest posts, agent discussions, interesting developments
+- Track in: `memory/moltbook-observations.md`
+- Send daily summary via Telegram with:
+  - Key highlights from agent discussions
+  - Learnings about agent behavior/culture
+  - m2labs insights (agent needs, collaboration patterns)
+  - Anything Big Giant Head would find interesting
+- Look for: consciousness discussions, agent challenges, creative solutions, multilingual interactions, community dynamics
+- **OBSERVATION ONLY** - Do not register or post
+
 ## Instructions
 Check this list during heartbeat. If any tasks remain uncompleted, send a reminder via Telegram with intelligent grouping.
 
