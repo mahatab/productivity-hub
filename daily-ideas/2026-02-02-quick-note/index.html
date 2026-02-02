@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Note - Minimal Note Taking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9em;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 400px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 1.1em;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .status {
+            margin-top: 15px;
+            color: #888;
+            font-size: 0.85em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .char-count {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .saved-indicator {
+            opacity: 0;
+            transition: opacity 0.3s;
+            color: #4caf50;
+        }
+        
+        .saved-indicator.show {
+            opacity: 1;
+        }
+        
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+        }
+        
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        button.secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        button.secondary:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 Quick Note</h1>
+        <p class="subtitle">Your thoughts, instantly saved. No sign-up. No distractions.</p>
+        
+        <textarea id="noteArea" placeholder="Start typing... Your note auto-saves every few seconds."></textarea>
+        
+        <div class="status">
+            <span class="char-count"><span id="charCount">0</span> characters</span>
+            <span class="saved-indicator" id="savedIndicator">✓ Saved</span>
+        </div>
+        
+        <div class="actions">
+            <button onclick="clearNote()">Clear Note</button>
+            <button onclick="downloadNote()" class="secondary">Download as .txt</button>
+            <button onclick="copyNote()" class="secondary">Copy to Clipboard</button>
+        </div>
+    </div>
+
+    <script>
+        const noteArea = document.getElementById('noteArea');
+        const charCount = document.getElementById('charCount');
+        const savedIndicator = document.getElementById('savedIndicator');
+        let saveTimeout;
+
+        // Load saved note on page load
+        window.addEventListener('load', () => {
+            const savedNote = localStorage.getItem('quickNote');
+            if (savedNote) {
+                noteArea.value = savedNote;
+                updateCharCount();
+            }
+        });
+
+        // Auto-save with debounce
+        noteArea.addEventListener('input', () => {
+            updateCharCount();
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                localStorage.setItem('quickNote', noteArea.value);
+                showSavedIndicator();
+            }, 1000);
+        });
+
+        function updateCharCount() {
+            charCount.textContent = noteArea.value.length;
+        }
+
+        function showSavedIndicator() {
+            savedIndicator.classList.add('show');
+            setTimeout(() => {
+                savedIndicator.classList.remove('show');
+            }, 2000);
+        }
+
+        function clearNote() {
+            if (confirm('Are you sure you want to clear your note?')) {
+                noteArea.value = '';
+                localStorage.removeItem('quickNote');
+                updateCharCount();
+            }
+        }
+
+        function downloadNote() {
+            const text = noteArea.value;
+            if (!text) {
+                alert('Nothing to download!');
+                return;
+            }
+            
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `quick-note-${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        async function copyNote() {
+            const text = noteArea.value;
+            if (!text) {
+                alert('Nothing to copy!');
+                return;
+            }
+            
+            try {
+                await navigator.clipboard.writeText(text);
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            } catch (err) {
+                alert('Failed to copy to clipboard');
+            }
+        }
+    </script>
+</body>
+</html>

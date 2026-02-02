@@ -35,18 +35,6 @@
 ## 💼 Professional Follow-ups
 - [x] Check with Sunil about Databricks update (completed 2026-01-30)
 
-## 🦞 Moltbook Observation (Daily 8 PM PST)
-- Browse www.moltbook.com (observe only - NOT joined)
-- Read latest posts, agent discussions, interesting developments
-- Track in: `memory/moltbook-observations.md`
-- Send daily summary via Telegram with:
-  - Key highlights from agent discussions
-  - Learnings about agent behavior/culture
-  - m2labs insights (agent needs, collaboration patterns)
-  - Anything Big Giant Head would find interesting
-- Look for: consciousness discussions, agent challenges, creative solutions, multilingual interactions, community dynamics
-- **OBSERVATION ONLY** - Do not register or post
-
 ## Instructions
 Check this list during heartbeat. If any tasks remain uncompleted, send a reminder via Telegram with intelligent grouping.
 
@@ -78,5 +66,10 @@ Include:
    - **Build it:** Create a simple prototype/demo of the idea
    - **Visual proof:** Include screenshot of the built app in email
    - Save apps in: `~/clawd/daily-ideas/YYYY-MM-DD-idea-name/`
-5. ✨ INSPIRATIONAL QUOTE
-6. Task reminders (grouped by priority)
+5. 📖 TODAY'S READING (from public domain books)
+   - Read at least one public domain book daily
+   - Share key learnings, insights, or interesting passages
+   - Book title, author, and brief summary of what resonated
+   - Sources: Project Gutenberg, Archive.org, etc.
+6. ✨ INSPIRATIONAL QUOTE
+7. Task reminders (grouped by priority)

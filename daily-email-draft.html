@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a2e;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .email-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #16213e;
+            color: #e4e4e4;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            color: white;
+            font-size: 32px;
+            font-weight: 700;
+        }
+        .date {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .section {
+            padding: 25px 30px;
+            border-bottom: 1px solid #2d3561;
+        }
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #9381ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .news-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #1a1a2e;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+        .news-source {
+            color: #9381ff;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .news-title {
+            color: #e4e4e4;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .game-item {
+            background-color: #1a1a2e;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .game-time {
+            color: #9381ff;
+            font-weight: 600;
+        }
+        .game-teams {
+            flex: 1;
+            margin: 0 15px;
+        }
+        .game-channel {
+            color: #ffd803;
+            font-size: 12px;
+        }
+        .idea-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #1a1a2e;
+            border-radius: 12px;
+        }
+        .idea-screenshot {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin: 15px 0;
+        }
+        .quote-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            font-style: italic;
+            font-size: 18px;
+            color: white;
+            line-height: 1.6;
+        }
+        .task-item {
+            padding: 12px;
+            margin-bottom: 8px;
+            background-color: #1a1a2e;
+            border-radius: 6px;
+            border-left: 3px solid #ff6b6b;
+        }
+        .urgent { border-left-color: #ff6b6b; }
+        .important { border-left-color: #ffd803; }
+        .business { border-left-color: #9381ff; }
+        .reading-box {
+            background-color: #1a1a2e;
+            padding: 20px;
+            border-radius: 12px;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #888;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>🌅 Daily Briefing</h1>
+            <div class="date">Sunday, February 2, 2026</div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">📰 TOP NEWS</div>
+            
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: #ffd803; margin-bottom: 12px;">🇧🇩 Bangladesh</h3>
+                <div class="news-item">
+                    <div class="news-source">Business Today</div>
+                    <p class="news-title">Former PM Sheikh Hasina sentenced to 10 years in jail in corruption case</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-source">Al Jazeera</div>
+                    <p class="news-title">Bangladesh elections scheduled for February 12 - what's at stake for India, China, Pakistan</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-source">Business Today</div>
+                    <p class="news-title">Bangladesh invites India to observe Feb 12 polls and referendum as 330 missions sign up</p>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <h3 style="color: #ffd803; margin-bottom: 12px;">🇺🇸 USA</h3>
+                <div class="news-item">
+                    <div class="news-source">CNN • Washington Post • The Guardian</div>
+                    <p class="news-title">House GOP searches for votes to end partial government shutdown - Speaker Johnson faces uphill battle with razor-thin majority</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-source">NBC News • ABC News</div>
+                    <p class="news-title">TODAY co-anchor Savannah Guthrie's mother reported missing in Arizona</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-source">The Seattle Times</div>
+                    <p class="news-title">King County, WA eviction levels hit an all-time high</p>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="color: #ffd803; margin-bottom: 12px;">🌍 International</h3>
+                <div class="news-item">
+                    <div class="news-source">The Guardian • New York Times • Washington Post</div>
+                    <p class="news-title">Israel agrees to limited reopening of Rafah border crossing in Gaza after nearly two years</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-source">New York Times</div>
+                    <p class="news-title">The Major Business Names in the Epstein Files</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-source">Bloomberg</div>
+                    <p class="news-title">Elon Musk in advanced talks to combine SpaceX and xAI</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🏅 GAMES ON TV TODAY</div>
+            
+            <h3 style="color: #9381ff; font-size: 18px; margin-bottom: 12px;">🏀 NBA</h3>
+            <div class="game-item">
+                <div class="game-time">12:00 PM</div>
+                <div class="game-teams">Pelicans @ Hornets</div>
+            </div>
+            <div class="game-item">
+                <div class="game-time">4:00 PM</div>
+                <div class="game-teams">Rockets @ Pacers</div>
+            </div>
+            <div class="game-item">
+                <div class="game-time">4:30 PM</div>
+                <div class="game-teams">Timberwolves @ Grizzlies</div>
+                <div class="game-channel">Peacock</div>
+            </div>
+            <div class="game-item">
+                <div class="game-time">7:00 PM</div>
+                <div class="game-teams">76ers @ Clippers</div>
+                <div class="game-channel">Peacock</div>
+            </div>
+
+            <h3 style="color: #9381ff; font-size: 18px; margin: 20px 0 12px;">🏒 NHL</h3>
+            <div class="game-item">
+                <div class="game-time">4:00 PM</div>
+                <div class="game-teams">Sabres @ Panthers</div>
+                <div class="game-channel">ESPN+</div>
+            </div>
+            <div class="game-item">
+                <div class="game-time">4:00 PM</div>
+                <div class="game-teams">Islanders @ Capitals</div>
+                <div class="game-channel">ESPN+</div>
+            </div>
+            <div class="game-item">
+                <div class="game-time">4:30 PM</div>
+                <div class="game-teams">Canadiens @ Wild</div>
+                <div class="game-channel">ESPN+</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">💡 NEW IDEA - Focus Timer</div>
+            <div class="idea-container">
+                <h3 style="color: #9381ff; margin-bottom: 15px;">🎯 One Task. Pure Focus. No Distractions.</h3>
+                <p style="color: #e4e4e4; margin-bottom: 20px; line-height: 1.6;">
+                    Built a beautiful Pomodoro-style focus timer that embodies the m2labs philosophy: 
+                    <strong>less noise, more clarity</strong>. Clean interface, zero distractions, 
+                    just you and your task for 25 minutes.
+                </p>
+                <img src="file:///Users/mahatabrashid/.clawdbot/media/browser/011c7126-6673-4d6d-8ab4-479d7766ef10.png" 
+                     alt="Focus Timer App" class="idea-screenshot">
+                <p style="color: #888; font-size: 13px; margin-top: 15px;">
+                    📂 Saved in: <code>~/clawd/daily-ideas/2026-02-02-focus-timer/</code><br>
+                    ✨ Try it: Open index.html in your browser
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">📖 TODAY'S READING</div>
+            <div class="reading-box">
+                <h3 style="color: #9381ff; margin-bottom: 15px;">The Art of Money Getting by P.T. Barnum (1880)</h3>
+                <p style="margin-bottom: 15px; font-style: italic;">
+                    "In the United States, where we have more land than people, it is not at all difficult 
+                    for persons in good health to make money. In this comparatively new field there are so 
+                    many avenues of success open, so many vocations which are not crowded, that any person 
+                    of either sex who is willing, at least for the time being, to engage in any respectable 
+                    occupation that offers, may find lucrative employment."
+                </p>
+                <p style="margin-bottom: 15px;">
+                    "Those who really desire to attain an independence, have only to set their minds upon it, 
+                    and adopt the proper means, as they do in regard to any other object which they wish to 
+                    accomplish, and the thing is easily done. But however easy it may be found to make money, 
+                    I have no doubt many of my hearers will agree it is the most difficult thing in the world 
+                    to keep it."
+                </p>
+                <p style="color: #ffd803; font-weight: 600;">
+                    💭 Key Insight: "The road to wealth is as plain as the road to the mill. It consists simply 
+                    in expending less than we earn."
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">✨ INSPIRATIONAL QUOTE</div>
+            <div class="quote-box">
+                "The only way to do great work is to love what you do. If you haven't found it yet, 
+                keep looking. Don't settle."
+                <div style="margin-top: 15px; font-size: 16px; opacity: 0.9;">— Steve Jobs</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">⚠️ TASK REMINDERS</div>
+            
+            <h3 style="color: #ff6b6b; font-size: 18px; margin-bottom: 12px;">🚨 URGENT</h3>
+            <div class="task-item urgent">Schedule doctor appointment for Sanjida</div>
+            <div class="task-item urgent">Renew Aditto's passport - ASAP</div>
+            <div class="task-item urgent">Find Aditto's camera and send to Arizona</div>
+
+            <h3 style="color: #ffd803; font-size: 18px; margin: 20px 0 12px;">⚠️ IMPORTANT - Family & Personal</h3>
+            <div class="task-item important">Insurance update for 3 of us</div>
+            <div class="task-item important">Hyundai and Lexus servicing</div>
+            <div class="task-item important">Buy game pass for Romeo</div>
+            <div class="task-item important">Garage cleanup</div>
+            <div class="task-item important">Haircut</div>
+
+            <h3 style="color: #9381ff; font-size: 18px; margin: 20px 0 12px;">🏢 M2LABS Business</h3>
+            <div class="task-item business">Register m2labs as LLC in Washington State</div>
+            <div class="task-item business">Make a list of paid AI services for m2labs</div>
+            <div class="task-item business">m2labs website building</div>
+            <div class="task-item business">Need to move MitysCreativeStudio site</div>
+            <div class="task-item business">AI Notepad for macOS - Start development (PRD ready)</div>
+        </div>
+
+        <div class="footer">
+            <p>🦸🏻‍♂️ Your daily assistant, Rudro</p>
+            <p style="margin-top: 10px;">Have a productive Sunday!</p>
+        </div>
+    </div>
+</body>
+</html>
