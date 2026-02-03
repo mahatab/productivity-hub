@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Score Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .sports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .sport-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.18);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sport-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+        }
+
+        .sport-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .sport-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .match {
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: background 0.2s ease;
+        }
+
+        .match:hover {
+            background: rgba(0,0,0,0.3);
+        }
+
+        .match:last-child {
+            margin-bottom: 0;
+        }
+
+        .match-status {
+            font-size: 0.8em;
+            color: #ffd700;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .team-name {
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .score {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #ffd700;
+        }
+
+        .match-info {
+            font-size: 0.85em;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #ff4444;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .no-matches {
+            text-align: center;
+            opacity: 0.7;
+            font-style: italic;
+            padding: 20px;
+        }
+
+        .refresh-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .refresh-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚽ Sports Score Dashboard</h1>
+        <p class="subtitle">Live scores and updates for your favorite sports</p>
+
+        <div class="sports-grid" id="sports-grid">
+            <!-- Cricket -->
+            <div class="sport-card">
+                <div class="sport-icon">🏏</div>
+                <div class="sport-title">Cricket</div>
+                
+                <div class="match">
+                    <div class="match-status"><span class="live-dot"></span>Live</div>
+                    <div class="teams">
+                        <div class="team">
+                            <span class="team-name">England</span>
+                            <span class="score">129</span>
+                        </div>
+                        <div class="team">
+                            <span class="score">117</span>
+                            <span class="team-name">Sri Lanka</span>
+                        </div>
+                    </div>
+                    <div class="match-info">T20 Series - England won by 12 runs</div>
+                </div>
+
+                <div class="match">
+                    <div class="match-status">Upcoming</div>
+                    <div class="teams">
+                        <div class="team">
+                            <span class="team-name">India</span>
+                            <span class="score">-</span>
+                        </div>
+                        <div class="team">
+                            <span class="score">-</span>
+                            <span class="team-name">Australia</span>
+                        </div>
+                    </div>
+                    <div class="match-info">Test Match - Feb 5, 4:00 AM PST</div>
+                </div>
+            </div>
+
+            <!-- Soccer -->
+            <div class="sport-card">
+                <div class="sport-icon">⚽</div>
+                <div class="sport-title">Soccer</div>
+                
+                <div class="match">
+                    <div class="match-status">Tonight</div>
+                    <div class="teams">
+                        <div class="team">
+                            <span class="team-name">Liverpool</span>
+                            <span class="score">-</span>
+                        </div>
+                        <div class="team">
+                            <span class="score">-</span>
+                            <span class="team-name">Man City</span>
+                        </div>
+                    </div>
+                    <div class="match-info">Premier League - 7:00 PM PST on NBC</div>
+                </div>
+
+                <div class="match">
+                    <div class="match-status">Tonight</div>
+                    <div class="teams">
+                        <div class="team">
+                            <span class="team-name">Arsenal</span>
+                            <span class="score">-</span>
+                        </div>
+                        <div class="team">
+                            <span class="score">-</span>
+                            <span class="team-name">Chelsea</span>
+                        </div>
+                    </div>
+                    <div class="match-info">Premier League - 4:30 PM PST on USA Network</div>
+                </div>
+            </div>
+
+            <!-- Basketball -->
+            <div class="sport-card">
+                <div class="sport-icon">🏀</div>
+                <div class="sport-title">Basketball</div>
+                
+                <div class="match">
+                    <div class="match-status">Tonight</div>
+                    <div class="teams">
+                        <div class="team">
+                            <span class="team-name">Lakers</span>
+                            <span class="score">-</span>
+                        </div>
+                        <div class="team">
+                            <span class="score">-</span>
+                            <span class="team-name">Warriors</span>
+                        </div>
+                    </div>
+                    <div class="match-info">NBA - 7:30 PM PST on TNT</div>
+                </div>
+
+                <div class="match">
+                    <div class="match-status">Tonight</div>
+                    <div class="teams">
+                        <div class="team">
+                            <span class="team-name">Celtics</span>
+                            <span class="score">-</span>
+                        </div>
+                        <div class="team">
+                            <span class="score">-</span>
+                            <span class="team-name">Heat</span>
+                        </div>
+                    </div>
+                    <div class="match-info">NBA - 5:00 PM PST on ESPN</div>
+                </div>
+            </div>
+
+            <!-- NFL -->
+            <div class="sport-card">
+                <div class="sport-icon">🏈</div>
+                <div class="sport-title">NFL</div>
+                
+                <div class="match">
+                    <div class="match-status">This Week</div>
+                    <div class="teams">
+                        <div class="team">
+                            <span class="team-name">49ers</span>
+                            <span class="score">-</span>
+                        </div>
+                        <div class="team">
+                            <span class="score">-</span>
+                            <span class="team-name">Chiefs</span>
+                        </div>
+                    </div>
+                    <div class="match-info">Super Bowl LX - Feb 9, 3:30 PM PST on CBS</div>
+                </div>
+
+                <div class="match">
+                    <div class="no-matches">No other games this week</div>
+                </div>
+            </div>
+        </div>
+
+        <button class="refresh-btn" onclick="location.reload()">🔄</button>
+    </div>
+
+    <script>
+        // Add auto-refresh every 30 seconds for live matches
+        setInterval(() => {
+            const liveMatches = document.querySelectorAll('.match-status:contains("Live")');
+            if (liveMatches.length > 0) {
+                console.log('Refreshing live scores...');
+                // In production, this would fetch real data from a sports API
+            }
+        }, 30000);
+
+        // Add timestamp
+        const subtitle = document.querySelector('.subtitle');
+        const now = new Date();
+        subtitle.textContent += ` • Last updated: ${now.toLocaleTimeString()}`;
+    </script>
+</body>
+</html>
