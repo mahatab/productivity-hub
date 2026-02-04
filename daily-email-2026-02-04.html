@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a2e;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            color: #e8e8e8;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: white;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .section {
+            padding: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .section-title {
+            font-size: 1.8em;
+            margin: 0 0 20px 0;
+            color: #667eea;
+        }
+        .news-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .news-item h3 {
+            margin: 0 0 10px 0;
+            color: #89a5f2;
+            font-size: 1.2em;
+        }
+        .news-item p {
+            margin: 5px 0;
+            line-height: 1.6;
+            color: #c8c8c8;
+        }
+        .news-source {
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 10px;
+        }
+        .breaking {
+            background: rgba(255, 100, 100, 0.15);
+            border-left-color: #ff6464;
+        }
+        .sports-game {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .app-preview {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .app-preview img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+        .reading-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #764ba2;
+            font-style: italic;
+            line-height: 1.8;
+        }
+        .quote-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-style: italic;
+            color: white;
+        }
+        .task-reminder {
+            background: rgba(255, 200, 100, 0.15);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc864;
+            margin-bottom: 10px;
+        }
+        .urgent {
+            background: rgba(255, 100, 100, 0.15);
+            border-left-color: #ff6464;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌅 Daily Briefing - February 4, 2026</h1>
+            <p>Your personalized news, insights, and productivity updates</p>
+        </div>
+
+        <!-- BREAKING NEWS -->
+        <div class="section">
+            <h2 class="section-title">⚡ BREAKING NEWS</h2>
+            <div class="news-item breaking">
+                <h3>🚨 Savannah Guthrie's Mother Missing from Arizona Home</h3>
+                <p>Nancy Guthrie, 77-year-old mother of NBC's "Today" host Savannah Guthrie, has disappeared from her Arizona home. Sheriff investigating possible ransom notes and using pacemaker data to establish timeline. Authorities believe she may still be alive.</p>
+                <p class="news-source">📰 CNN, BBC, Fox News - February 4, 2026</p>
+            </div>
+        </div>
+
+        <!-- TOP NEWS -->
+        <div class="section">
+            <h2 class="section-title">📰 TOP NEWS</h2>
+            
+            <h3 style="color: #89a5f2; margin-top: 20px;">🇧🇩 BANGLADESH</h3>
+            <div class="news-item">
+                <h3>National Elections Scheduled for February 12</h3>
+                <p>Bangladesh prepares for crucial general elections after years of political turmoil and the ousting of Sheikh Hasina. Chief Adviser Muhammad Yunus's interim government faces scrutiny over major decisions ahead of the election.</p>
+                <p class="news-source">📰 BBC, bdnews24.com - February 4, 2026</p>
+            </div>
+            <div class="news-item">
+                <h3>Two Tremors Strike Near Myanmar Border</h3>
+                <p>Bangladesh experienced two earthquakes within 17 minutes near the Myanmar border, causing concern among residents but no major damage reported.</p>
+                <p class="news-source">📰 bdnews24.com - February 4, 2026</p>
+            </div>
+
+            <h3 style="color: #89a5f2; margin-top: 30px;">🇺🇸 UNITED STATES</h3>
+            <div class="news-item">
+                <h3>700 Immigration Agents to Leave Minnesota</h3>
+                <p>Trump's "border tsar" Tom Homan announces withdrawal of 700 federal agents from Minnesota today, leaving around 2,000. This follows incidents where two US citizens were killed during the immigration crackdown.</p>
+                <p class="news-source">📰 BBC - February 4, 2026</p>
+            </div>
+
+            <h3 style="color: #89a5f2; margin-top: 30px;">🌍 INTERNATIONAL</h3>
+            <div class="news-item">
+                <h3>US-Russia Nuclear Treaty Set to Expire</h3>
+                <p>Fears of new arms race as the New START treaty, which has limited deployed strategic nuclear warheads for both countries, approaches expiration. No replacement agreement in sight.</p>
+                <p class="news-source">📰 BBC - February 4, 2026</p>
+            </div>
+            <div class="news-item">
+                <h3>Ukraine Power Crisis Deepens</h3>
+                <p>Thousands remain without power in freezing Ukraine as renewed Russian strikes continue. President Zelensky reports Kyiv and Kharkiv among the regions suffering most from blackouts.</p>
+                <p class="news-source">📰 BBC - February 4, 2026</p>
+            </div>
+            <div class="news-item">
+                <h3>Prince Andrew & Epstein Scandal Widens</h3>
+                <p>New legal letter claims Andrew and Jeffrey Epstein asked exotic dancer for "sex acts" at Epstein's home. Meanwhile, UK PM Starmer faces questions about Peter Mandelson's connections to Epstein.</p>
+                <p class="news-source">📰 BBC - February 4, 2026</p>
+            </div>
+        </div>
+
+        <!-- SPORTS -->
+        <div class="section">
+            <h2 class="section-title">🏅 GAMES ON TV TODAY</h2>
+            
+            <h3 style="color: #89a5f2; margin-bottom: 15px;">🏀 NBA</h3>
+            <div class="sports-game">
+                <span><strong>Denver Nuggets @ New York Knicks</strong></span>
+                <span>4:00 PM PST • ESPN</span>
+            </div>
+            <div class="sports-game">
+                <span><strong>Minnesota Timberwolves @ Toronto Raptors</strong></span>
+                <span>4:30 PM PST</span>
+            </div>
+            <div class="sports-game">
+                <span><strong>Boston Celtics @ Houston Rockets</strong></span>
+                <span>5:00 PM PST</span>
+            </div>
+            <div class="sports-game">
+                <span><strong>New Orleans Pelicans @ Milwaukee Bucks</strong></span>
+                <span>5:00 PM PST</span>
+            </div>
+            <div class="sports-game">
+                <span><strong>Oklahoma City Thunder @ San Antonio Spurs</strong></span>
+                <span>6:30 PM PST • ESPN</span>
+            </div>
+            <div class="sports-game">
+                <span><strong>Memphis Grizzlies @ Sacramento Kings</strong></span>
+                <span>7:00 PM PST</span>
+            </div>
+            <div class="sports-game">
+                <span><strong>Cleveland Cavaliers @ LA Clippers</strong></span>
+                <span>7:30 PM PST</span>
+            </div>
+
+            <h3 style="color: #89a5f2; margin-top: 25px; margin-bottom: 15px;">🏒 NHL</h3>
+            <div class="sports-game">
+                <span><strong>Boston Bruins @ Florida Panthers</strong></span>
+                <span>4:00 PM PST • TNT/HBO Max</span>
+            </div>
+        </div>
+
+        <!-- M2LABS IDEA -->
+        <div class="section">
+            <h2 class="section-title">💡 TODAY'S M2LABS IDEA</h2>
+            <div class="app-preview">
+                <h3 style="color: #89a5f2; margin-top: 0;">🎯 Focus Timer Dashboard</h3>
+                <p style="color: #c8c8c8; margin-bottom: 20px;">
+                    <strong>The Problem:</strong> Productivity apps are cluttered with features nobody uses. People just want to focus.<br><br>
+                    <strong>The m2labs Solution:</strong> A clean, beautiful Pomodoro timer with task tracking and stats - nothing more, nothing less.<br><br>
+                    <strong>Features:</strong> 25-minute focus sessions, short/long breaks, task list, daily stats tracking, dark mode design, localStorage for persistence.
+                </p>
+                <img src="cid:app_screenshot" alt="Focus Timer Dashboard" style="max-width: 100%; border-radius: 10px;">
+                <p style="margin-top: 15px; color: #888;">
+                    💾 Saved at: <code>~/clawd/daily-ideas/2026-02-04-focus-timer-dashboard/</code>
+                </p>
+            </div>
+        </div>
+
+        <!-- TODAY'S READING -->
+        <div class="section">
+            <h2 class="section-title">📖 TODAY'S READING</h2>
+            <div class="reading-box">
+                <h3 style="color: #89a5f2; margin-top: 0;">Meditations by Marcus Aurelius (Book II)</h3>
+                <p style="color: #e0e0e0; line-height: 1.9;">
+                    Today's passage from the great Stoic philosopher and Roman Emperor reminds us about character and virtue. Marcus Aurelius, despite being one of the most powerful men in the world, lived with remarkable simplicity. He was "trained to hardihood by wrestling, hunting, and outdoor games" and "kept from the extravagancies of his day."
+                </p>
+                <p style="color: #c8c8c8; margin-top: 20px;">
+                    <strong>💭 Key Insight:</strong> Marcus learned from his grandfather "to be gentle and meek, and to refrain from all anger and passion." Even Emperor Hadrian recognized his truthfulness, calling him "Verissimus" - more truthful than his own name.
+                </p>
+                <p style="color: #c8c8c8; margin-top: 15px;">
+                    <strong>🎯 For Today:</strong> True strength isn't about power or wealth - it's about character, self-discipline, and staying true to your values even when the world offers you everything else.
+                </p>
+                <p style="color: #888; margin-top: 20px; font-size: 0.9em;">
+                    📚 Source: Project Gutenberg - Meditations by Marcus Aurelius (Public Domain)
+                </p>
+            </div>
+        </div>
+
+        <!-- INSPIRATIONAL QUOTE -->
+        <div class="section">
+            <h2 class="section-title">✨ INSPIRATIONAL QUOTE</h2>
+            <div class="quote-box">
+                "The impediment to action advances action.<br>What stands in the way becomes the way."<br><br>
+                <span style="font-size: 0.8em; font-style: normal;">— Marcus Aurelius, Meditations</span>
+            </div>
+        </div>
+
+        <!-- TASK REMINDERS -->
+        <div class="section">
+            <h2 class="section-title">📋 TASK REMINDERS</h2>
+            
+            <h3 style="color: #ff6464; margin-top: 20px;">🚨 URGENT</h3>
+            <div class="task-reminder urgent">
+                <strong>Schedule doctor appointment for Sanjida</strong>
+            </div>
+            <div class="task-reminder urgent">
+                <strong>Renew Aditto's passport - ASAP</strong>
+            </div>
+            <div class="task-reminder urgent">
+                <strong>Find Aditto's camera and send to Arizona</strong>
+            </div>
+
+            <h3 style="color: #ffc864; margin-top: 30px;">⚠️ IMPORTANT - Family & Personal</h3>
+            <div class="task-reminder">
+                Insurance update for 3 of us
+            </div>
+            <div class="task-reminder">
+                Hyundai and Lexus servicing
+            </div>
+            <div class="task-reminder">
+                Buy game pass for Romeo
+            </div>
+            <div class="task-reminder">
+                Garage cleanup
+            </div>
+            <div class="task-reminder">
+                Haircut
+            </div>
+
+            <h3 style="color: #667eea; margin-top: 30px;">🏢 M2LABS Business</h3>
+            <div class="task-reminder">
+                Register m2labs as LLC in Washington State
+            </div>
+            <div class="task-reminder">
+                Make a list of paid AI services for m2labs
+            </div>
+            <div class="task-reminder">
+                m2labs website building
+            </div>
+            <div class="task-reminder">
+                Need to move MitysCreativeStudio site
+            </div>
+            <div class="task-reminder">
+                <strong>AI Notepad for macOS - Start development</strong> (PRD ready, share with Claude Code)
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🦸🏻‍♂️ Prepared with focus by Rudro</p>
+            <p>Built with care • Dark mode optimized • Have a productive day!</p>
+        </div>
+    </div>
+</body>
+</html>

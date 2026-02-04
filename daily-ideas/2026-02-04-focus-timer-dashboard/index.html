@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Timer Dashboard - m2labs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3em;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #a8a8a8;
+            font-size: 1.1em;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .timer-card {
+            grid-column: 1 / -1;
+            text-align: center;
+        }
+
+        .timer-display {
+            font-size: 6em;
+            font-weight: bold;
+            margin: 30px 0;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .mode-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            border-color: #667eea;
+        }
+
+        .tasks-card h2, .stats-card h2 {
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .task-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 1em;
+        }
+
+        input[type="text"]::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .task-list {
+            list-style: none;
+        }
+
+        .task-item {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .task-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .task-item.completed {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            margin-left: auto;
+            padding: 5px 10px;
+            font-size: 0.9em;
+            background: rgba(255, 100, 100, 0.3);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: rgba(255, 100, 100, 0.5);
+        }
+
+        .stats {
+            display: grid;
+            gap: 15px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+        }
+
+        .stat-label {
+            color: #a8a8a8;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .timer-display {
+                font-size: 4em;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Focus Timer Dashboard</h1>
+            <p class="subtitle">Stay focused. Get things done. Track your progress.</p>
+        </header>
+
+        <div class="dashboard">
+            <div class="card timer-card">
+                <div class="mode-selector">
+                    <button class="mode-btn active" data-mode="pomodoro">🍅 Pomodoro (25m)</button>
+                    <button class="mode-btn" data-mode="short">☕ Short Break (5m)</button>
+                    <button class="mode-btn" data-mode="long">🌴 Long Break (15m)</button>
+                </div>
+
+                <div class="timer-display" id="timerDisplay">25:00</div>
+
+                <div class="timer-controls">
+                    <button class="btn-primary" id="startBtn">▶️ Start</button>
+                    <button class="btn-secondary" id="pauseBtn">⏸️ Pause</button>
+                    <button class="btn-secondary" id="resetBtn">🔄 Reset</button>
+                </div>
+            </div>
+
+            <div class="card tasks-card">
+                <h2>📝 Today's Tasks</h2>
+                <div class="task-input">
+                    <input type="text" id="taskInput" placeholder="Add a new task...">
+                    <button class="btn-primary" id="addTaskBtn">Add</button>
+                </div>
+                <ul class="task-list" id="taskList"></ul>
+            </div>
+
+            <div class="card stats-card">
+                <h2>📊 Today's Stats</h2>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">🍅 Pomodoros Completed</span>
+                        <span class="stat-value" id="pomodoroCount">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">✅ Tasks Completed</span>
+                        <span class="stat-value" id="taskCount">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">⏱️ Focus Time</span>
+                        <span class="stat-value" id="focusTime">0h 0m</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🔥 Current Streak</span>
+                        <span class="stat-value" id="streakCount">0 days</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Timer state
+        let timerInterval = null;
+        let timeRemaining = 25 * 60;
+        let currentMode = 'pomodoro';
+        let isRunning = false;
+
+        const modes = {
+            pomodoro: 25 * 60,
+            short: 5 * 60,
+            long: 15 * 60
+        };
+
+        // DOM elements
+        const timerDisplay = document.getElementById('timerDisplay');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const modeBtns = document.querySelectorAll('.mode-btn');
+        const taskInput = document.getElementById('taskInput');
+        const addTaskBtn = document.getElementById('addTaskBtn');
+        const taskList = document.getElementById('taskList');
+        const pomodoroCount = document.getElementById('pomodoroCount');
+        const taskCount = document.getElementById('taskCount');
+
+        // Load stats from localStorage
+        let stats = JSON.parse(localStorage.getItem('focusStats')) || {
+            pomodoros: 0,
+            tasksCompleted: 0,
+            focusMinutes: 0
+        };
+
+        // Update display
+        function updateDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function updateStats() {
+            pomodoroCount.textContent = stats.pomodoros;
+            taskCount.textContent = stats.tasksCompleted;
+            const hours = Math.floor(stats.focusMinutes / 60);
+            const minutes = stats.focusMinutes % 60;
+            document.getElementById('focusTime').textContent = `${hours}h ${minutes}m`;
+            localStorage.setItem('focusStats', JSON.stringify(stats));
+        }
+
+        // Timer functions
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                startBtn.textContent = '⏸️ Pause';
+                timerInterval = setInterval(() => {
+                    timeRemaining--;
+                    updateDisplay();
+
+                    if (timeRemaining <= 0) {
+                        clearInterval(timerInterval);
+                        isRunning = false;
+                        startBtn.textContent = '▶️ Start';
+                        
+                        if (currentMode === 'pomodoro') {
+                            stats.pomodoros++;
+                            stats.focusMinutes += 25;
+                            updateStats();
+                            alert('🎉 Pomodoro completed! Time for a break!');
+                        }
+                        
+                        resetTimer();
+                    }
+                }, 1000);
+            } else {
+                pauseTimer();
+            }
+        }
+
+        function pauseTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            startBtn.textContent = '▶️ Start';
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            timeRemaining = modes[currentMode];
+            updateDisplay();
+            startBtn.textContent = '▶️ Start';
+        }
+
+        // Mode switching
+        modeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentMode = btn.dataset.mode;
+                resetTimer();
+            });
+        });
+
+        // Task management
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+        function renderTasks() {
+            taskList.innerHTML = '';
+            tasks.forEach((task, index) => {
+                const li = document.createElement('li');
+                li.className = `task-item ${task.completed ? 'completed' : ''}`;
+                li.innerHTML = `
+                    <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''} data-index="${index}">
+                    <span>${task.text}</span>
+                    <button class="delete-btn" data-index="${index}">Delete</button>
+                `;
+                taskList.appendChild(li);
+            });
+
+            // Add event listeners
+            document.querySelectorAll('.task-checkbox').forEach(cb => {
+                cb.addEventListener('change', toggleTask);
+            });
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', deleteTask);
+            });
+        }
+
+        function addTask() {
+            const text = taskInput.value.trim();
+            if (text) {
+                tasks.push({ text, completed: false });
+                taskInput.value = '';
+                saveTasks();
+                renderTasks();
+            }
+        }
+
+        function toggleTask(e) {
+            const index = parseInt(e.target.dataset.index);
+            tasks[index].completed = !tasks[index].completed;
+            if (tasks[index].completed) {
+                stats.tasksCompleted++;
+                updateStats();
+            } else {
+                stats.tasksCompleted--;
+                updateStats();
+            }
+            saveTasks();
+            renderTasks();
+        }
+
+        function deleteTask(e) {
+            const index = parseInt(e.target.dataset.index);
+            if (tasks[index].completed) {
+                stats.tasksCompleted--;
+                updateStats();
+            }
+            tasks.splice(index, 1);
+            saveTasks();
+            renderTasks();
+        }
+
+        function saveTasks() {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        // Event listeners
+        startBtn.addEventListener('click', startTimer);
+        pauseBtn.addEventListener('click', pauseTimer);
+        resetBtn.addEventListener('click', resetTimer);
+        addTaskBtn.addEventListener('click', addTask);
+        taskInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addTask();
+        });
+
+        // Initialize
+        updateDisplay();
+        updateStats();
+        renderTasks();
+
+        // Simulate streak (random for demo)
+        document.getElementById('streakCount').textContent = Math.floor(Math.random() * 15) + 1 + ' days';
+    </script>
+</body>
+</html>
