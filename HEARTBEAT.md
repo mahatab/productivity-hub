@@ -47,6 +47,11 @@ Send to: mahatab@msn.com
 - 🎨 **Professional but fun** - Clean design, not boring
 - 🌙 **Dark mode theme** - Dark background, light text, easy on eyes
 
+**🎙️ Voice Format:**
+- Also send daily briefing as voice message via Telegram
+- Use Edge TTS with Christopher voice (professional, authoritative)
+- Command: `/Users/mahatabrashid/Library/Python/3.9/bin/edge-tts --voice en-US-ChristopherNeural`
+
 **News Gathering Method:**
 - **Primary:** Use browser tool to visit Google News, BBC, Reuters
 - **Fallback:** Use web_search if browser fails
@@ -62,14 +67,14 @@ Include:
    - Include: Game matchup, time (PST), channel
    - Check for: Premier League, Champions League, Cricket internationals, NFL, NBA
 4. 💡 NEW IDEAS (related to m2labs, tech, interests)
-   - **Actionable:** Each idea must be translatable into a site or app
-   - **Build it:** Create a simple prototype/demo of the idea
-   - **Visual proof:** Include screenshot of the built app in email
-   - Save apps in: `~/clawd/daily-ideas/YYYY-MM-DD-idea-name/`
-5. 📖 TODAY'S READING (from public domain books)
-   - Read at least one public domain book daily
-   - Share key learnings, insights, or interesting passages
-   - Book title, author, and brief summary of what resonated
-   - Sources: Project Gutenberg, Archive.org, etc.
-6. ✨ INSPIRATIONAL QUOTE
-7. Task reminders (grouped by priority)
+   - **Describe idea only** - no need to build it
+   - Explain the concept, problem it solves, features
+   - Keep it brief and actionable
+5. ✨ INSPIRATIONAL QUOTE
+6. Task reminders (grouped by priority)
+
+## ❌ DISCONTINUED TASKS
+- NO Moltbook daily observations (stopped 2026-02-04)
+- NO public domain book readings in daily email (stopped 2026-02-04)
+- NO building sample applications for daily ideas (stopped 2026-02-04)
+  - Just describe the idea, don't code it
