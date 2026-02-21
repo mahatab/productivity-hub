@@ -2,10 +2,29 @@
 
 # Daily reminders - check once per day
 
-## 📧 Email Monitoring
-- Check for new job application emails (subject contains "job:")
-- Auto-process and add to JOBS-DASHBOARD.md
-- Notify Big Giant Head of any new job responses
+## 📧 Email Monitoring & Job Processing (CRITICAL - DAILY)
+**⚠️ ERROR NOTIFICATION: If this fails, immediately notify Big Giant Head via Telegram**
+
+### Daily Job Email Processing (Every Morning at 8 AM):
+1. **Check Gmail** for job-related emails (past 24 hours)
+   - `python3 ~/clawd/scripts/gmail-read.py --count 30 --search "job:"`
+2. **Categorize emails:**
+   - **🎯 Application Confirmations** - "Thanks for applying", application received
+   - **📧 Interview Requests** - Interview invitations, scheduling requests
+   - **✅ Offers** - Job offer letters
+   - **❌ Rejections** - "pursuing other candidates", position filled
+   - **📢 Recommendations** - Job board alerts, LinkedIn suggestions (IGNORE in updates)
+3. **Update JOBS-DASHBOARD.md** for:
+   - New application confirmations (add to Active Applications)
+   - Interview requests (move to Interview Pipeline)
+   - Offers (move to Offers section)
+   - Rejections (move to Rejected/Closed with reason)
+4. **Alert via Telegram** ONLY for:
+   - Interview requests 🎉
+   - Offers 🎊
+   - Rejections (with empathy)
+   - Application confirmations (brief note)
+5. **Include in Daily Briefing Email** (section between News and Ideas)
 
 ## 📋 Microsoft To Do Sync
 - Run daily sync: `node ~/clawd/scripts/microsoft-todo/sync-tasks.js`
@@ -66,12 +85,22 @@ Include:
 3. 🏅 GAMES ON TV TODAY (Soccer, Cricket, NFL, Basketball)
    - Include: Game matchup, time (PST), channel
    - Check for: Premier League, Champions League, Cricket internationals, NFL, NBA
-4. 💡 NEW IDEAS (related to m2labs, tech, interests)
+4. 💼 JOB SEARCH UPDATE (MANDATORY - CRITICAL)
+   - **Process job emails from past 24 hours**
+   - **Report ONLY meaningful updates:**
+     - 🎉 Interview requests (highlight these!)
+     - 🎊 Job offers
+     - ✅ Application confirmations
+     - ❌ Rejections (with brief context)
+   - **Skip:** Generic job board alerts, LinkedIn recommendations
+   - **If no updates:** Say "No new job responses in past 24 hours"
+   - **If processing fails:** Report the error immediately
+5. 💡 NEW IDEAS (related to m2labs, tech, interests)
    - **Describe idea only** - no need to build it
    - Explain the concept, problem it solves, features
    - Keep it brief and actionable
-5. ✨ INSPIRATIONAL QUOTE
-6. Task reminders (grouped by priority)
+6. ✨ INSPIRATIONAL QUOTE
+7. Task reminders (grouped by priority)
 
 ## ❌ DISCONTINUED TASKS
 - NO Moltbook daily observations (stopped 2026-02-04)

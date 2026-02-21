@@ -1,13 +1,13 @@
 # 💼 Job Applications Dashboard
 
-**Last Updated:** January 27, 2026
+**Last Updated:** February 18, 2026
 
 ---
 
 ## 📊 Summary
 
-- **Total Applications:** 7
-- **Active/In Progress:** 6
+- **Total Applications:** 8
+- **Active/In Progress:** 7
 - **Interviews Scheduled:** 0
 - **Offers:** 0
 - **Rejected:** 1
@@ -24,6 +24,12 @@
 ---
 
 ## 📋 Active Applications
+
+### Amazon - Sr. Technical Program Manager, Customer Service
+- **Applied:** Feb 18, 2026
+- **Status:** Applied - Under Review
+- **Follow-up:** Mar 4, 2026
+- **File:** `jobs/2026-02-18-amazon-sr-tpm-customer-service.md`
 
 ### MathWorks - Principal Program Manager
 - **Applied:** Jan 27, 2026

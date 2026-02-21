@@ -35,6 +35,20 @@ Using `himalaya` CLI for email management:
 - Account: `rudro` (default)
 - Can read, send, reply, forward, search emails
 
+## MSN/Outlook (mahatab@msn.com) - Read Only
+- **Access:** OAuth2 via Microsoft Graph API (`Mail.Read` scope)
+- **Azure App:** Client ID `7ed8b008-8f80-4c57-a7be-773210b67021` (public client, consumers tenant)
+- **Token:** `~/.clawdbot/msn/token.json`
+- **Helper script:** `~/clawd/scripts/msn-read.py`
+- **Usage:** `python3 ~/clawd/scripts/msn-read.py [--count N] [--unread] [--search "query"] [--folder inbox]`
+
+## Gmail (mahatab@gmail.com) - Read Only
+- **Access:** OAuth2 readonly (`gmail.readonly` scope)
+- **Credentials:** `~/.clawdbot/gmail/client_secret.json`
+- **Token:** `~/.clawdbot/gmail/token.json`
+- **Helper script:** `~/clawd/scripts/gmail-read.py`
+- **Usage:** `python3 ~/clawd/scripts/gmail-read.py [--count N] [--unread] [--search "query"]`
+
 ## What Goes Here
 
 Things like:
