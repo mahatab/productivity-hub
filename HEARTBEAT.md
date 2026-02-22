@@ -2,18 +2,30 @@
 
 # Daily reminders - check once per day
 
-## 📧 Email Monitoring & Job Processing
-**Manual only - no automatic email parsing**
+## 📊 Job Application Tracker - Daily Sync (8 AM PST)
+**CRITICAL: Follow scripts/JOB_TRACKER_INSTRUCTIONS.md EXACTLY**
 
-### Job Email Monitoring:
-- Check Gmail manually for job-related emails when relevant
-- **Alert via Telegram** for significant emails:
-  - 🎉 Interview requests
-  - 🎊 Job offers
-  - ❌ Rejections (with empathy)
-  - ✅ Application confirmations (brief note)
-- Update jobs/ folder and JOBS-DASHBOARD.md manually when Big Giant Head forwards job emails
-- **Include in Daily Briefing Email:** Brief summary of any job-related emails from past 24 hours
+### Daily Process (Last 24 Hours Only):
+1. **Search BOTH Gmail (mahatab@gmail.com) AND MSN (mahatab@msn.com)**
+2. **Use EXACT search criteria:**
+   - Subject/body: "Thanks for applying", "Thank you for applying", "Thank you for your interest", "Thanks for your interest"
+   - Sender patterns: career*, noreply*, no-reply*
+   - Sender contains: job, hire, talent, recruit
+   - LinkedIn: "application was sent", "You applied for"
+   - ATS platforms: Workday, Greenhouse, Lever, iCIMS, SmartRecruiters, Taleo
+   - Status updates: rejection, interview, assessment
+
+3. **Update Google Sheets:** 
+   - New application → Add new row
+   - Status update → Update existing row (Current Status, Last Update Date, Notes)
+   - Re-calculate "Follow-Up Needed" for all applications >14 days old
+
+4. **Alert via Telegram** for:
+   - 🎉 Interview requests
+   - 🎊 Job offers
+   - ❌ Rejections (with empathy)
+
+**Spreadsheet:** https://docs.google.com/spreadsheets/d/1d9OS6SEJWgJkDyYbTYiGB-4Jj3RsXz7CFNnwz-6E5X8
 
 ## 📋 Microsoft To Do Sync
 - Run daily sync: `node ~/clawd/scripts/microsoft-todo/sync-tasks.js`
