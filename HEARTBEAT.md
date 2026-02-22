@@ -2,29 +2,18 @@
 
 # Daily reminders - check once per day
 
-## 📧 Email Monitoring & Job Processing (CRITICAL - DAILY)
-**⚠️ ERROR NOTIFICATION: If this fails, immediately notify Big Giant Head via Telegram**
+## 📧 Email Monitoring & Job Processing
+**Manual only - no automatic email parsing**
 
-### Daily Job Email Processing (Every Morning at 8 AM):
-1. **Check Gmail** for job-related emails (past 24 hours)
-   - `python3 ~/clawd/scripts/gmail-read.py --count 30 --search "job:"`
-2. **Categorize emails:**
-   - **🎯 Application Confirmations** - "Thanks for applying", application received
-   - **📧 Interview Requests** - Interview invitations, scheduling requests
-   - **✅ Offers** - Job offer letters
-   - **❌ Rejections** - "pursuing other candidates", position filled
-   - **📢 Recommendations** - Job board alerts, LinkedIn suggestions (IGNORE in updates)
-3. **Update JOBS-DASHBOARD.md** for:
-   - New application confirmations (add to Active Applications)
-   - Interview requests (move to Interview Pipeline)
-   - Offers (move to Offers section)
-   - Rejections (move to Rejected/Closed with reason)
-4. **Alert via Telegram** ONLY for:
-   - Interview requests 🎉
-   - Offers 🎊
-   - Rejections (with empathy)
-   - Application confirmations (brief note)
-5. **Include in Daily Briefing Email** (section between News and Ideas)
+### Job Email Monitoring:
+- Check Gmail manually for job-related emails when relevant
+- **Alert via Telegram** for significant emails:
+  - 🎉 Interview requests
+  - 🎊 Job offers
+  - ❌ Rejections (with empathy)
+  - ✅ Application confirmations (brief note)
+- Update jobs/ folder and JOBS-DASHBOARD.md manually when Big Giant Head forwards job emails
+- **Include in Daily Briefing Email:** Brief summary of any job-related emails from past 24 hours
 
 ## 📋 Microsoft To Do Sync
 - Run daily sync: `node ~/clawd/scripts/microsoft-todo/sync-tasks.js`
