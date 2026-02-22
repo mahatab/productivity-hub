@@ -56,6 +56,17 @@ Also look for:
 **Consolidation Rule:**
 For applications with multiple emails (e.g., confirmation followed by rejection or interview invite), consolidate into a single row. Use the original application date as Date Applied and the latest status as Current Status.
 
+**Deduplication Rules:**
+- **Do not create duplicate entries**
+- **Primary match key:** Job ID + Company Name
+- **Extract Job ID exactly** as it appears in the confirmation email or application URL:
+  - LinkedIn job IDs
+  - Workday requisition numbers
+  - Greenhouse job IDs
+  - Any other ATS job identifiers
+- **Fallback matching (if no Job ID):** Company Name + Position Title + Date Applied
+- **Cross-account duplicates:** If the same application confirmation is found in both Gmail and MSN, record it **once** and note the email account where it was first found
+
 Populate the Google Sheet with all results, sorted by Date Applied descending (newest first).
 
 Mark Follow-Up Needed as YES for any application older than 14 days with no status update beyond the initial confirmation.

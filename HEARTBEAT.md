@@ -16,9 +16,11 @@
    - Status updates: rejection, interview, assessment
 
 3. **Update Google Sheets:** 
-   - New application → Add new row
+   - New application → Add new row (check for duplicates first!)
    - Status update → Update existing row (Current Status, Last Update Date, Notes)
    - Re-calculate "Follow-Up Needed" for all applications >14 days old
+   
+   **Deduplication:** Match on Job ID + Company Name (primary) or Company Name + Position Title + Date Applied (fallback). If same application in both accounts, record once.
 
 4. **Alert via Telegram** for:
    - 🎉 Interview requests
