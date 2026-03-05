@@ -105,6 +105,14 @@ Include:
 6. ✨ INSPIRATIONAL QUOTE
 7. Task reminders (grouped by priority)
 
+## 💡 Daily App Ideas Repository
+**After sending daily email:**
+1. Extract the new app idea from today's email
+2. Add it to `/Users/mahatabrashid/AppIdeasByRudra/Ideas.md`
+3. Format: Date, app name, problem it solves, concept, features, target users, tech stack
+4. Commit and push: `git commit -m "Add [AppName] idea (Month Day, Year)" && git push`
+5. **Repository:** https://github.com/mahatab/AppIdeasByRudra
+
 ## ❌ DISCONTINUED TASKS
 - NO Moltbook daily observations (stopped 2026-02-04)
 - NO public domain book readings in daily email (stopped 2026-02-04)
