@@ -99,19 +99,26 @@ Include:
    - **If no updates:** Say "No new job responses in past 24 hours"
    - **If processing fails:** Report the error immediately
 5. 💡 NEW IDEAS (related to m2labs, tech, interests)
+   - **RESEARCH FIRST:** Search for similar apps to ensure uniqueness
+   - Verify the problem is real and unsolved
    - **Describe idea only** - no need to build it
    - Explain the concept, problem it solves, features
    - Keep it brief and actionable
+   - **DIVERSITY RULE:** No category repeats within 30 days
+   - Check `memory/app-idea-categories.json` before generating idea
+   - Rotate through diverse categories: Health, Creative, Education, Finance, Travel, Gaming, Social, etc.
 6. ✨ INSPIRATIONAL QUOTE
 7. Task reminders (grouped by priority)
 
 ## 💡 Daily App Ideas Repository
 **After sending daily email:**
-1. Extract the new app idea from today's email
-2. Add it to `/Users/mahatabrashid/AppIdeasByRudra/Ideas.md`
-3. Format: Date, app name, problem it solves, concept, features, target users, tech stack
-4. Commit and push: `git commit -m "Add [AppName] idea (Month Day, Year)" && git push`
-5. **Repository:** https://github.com/mahatab/AppIdeasByRudra
+1. **Check diversity:** Read `memory/app-idea-categories.json` to ensure category hasn't been used in past 30 days
+2. Extract the new app idea from today's email
+3. Add it to `/Users/mahatabrashid/AppIdeasByRudra/Ideas.md`
+4. Format: Date, app name, problem it solves, concept, features, target users, tech stack
+5. **Update tracker:** Add new idea to `memory/app-idea-categories.json` with date and category
+6. Commit and push: `git commit -m "Add [AppName] idea (Month Day, Year)" && git push`
+7. **Repository:** https://github.com/mahatab/AppIdeasByRudra
 
 ## ❌ DISCONTINUED TASKS
 - NO Moltbook daily observations (stopped 2026-02-04)
